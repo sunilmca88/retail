@@ -10,43 +10,47 @@
     <!-- Custom styles for this template -->
     <style>
       /* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-body {
-  /* Margin bottom by footer height */
-  /* min-height: 75rem; */
-  padding-top: 4.5rem;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  line-height: 60px; /* Vertically center the text there */
-  background-color: #f5f5f5;
-}
+      -------------------------------------------------- */
+      html {
+        position: relative;
+        min-height: 100%;
+      }
+      body {
+        /* Margin bottom by footer height */
+        /* min-height: 75rem; */
+        padding-top: 4.5rem;
+      }
+      .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        /* Set the fixed height of the footer here */
+        height: 60px;
+        line-height: 60px; /* Vertically center the text there */
+        background-color: #f5f5f5;
+      }
 
 
-/* Custom page CSS
--------------------------------------------------- */
-/* Not required for template or sticky footer method. */
+      /* Custom page CSS
+      -------------------------------------------------- */
+      /* Not required for template or sticky footer method. */
 
-body > .container {
-  padding: 60px 15px 0;
-}
+      body > .container {
+        padding: 50px 10px 0;
+        margin-bottom: 75px;
+      }
 
-.footer > .container {
-  padding-right: 15px;
-  padding-left: 15px;
-}
+      .footer > .container {
+        padding-right: 15px;
+        padding-left: 15px;
+      }
 
-code {
-  font-size: 80%;
-}
+      code {
+        font-size: 80%;
+      }
+      .jumbotron {
+          padding: 2rem 2rem;
+      }
     </style>
     <title>Retail</title>
   </head>
@@ -79,13 +83,81 @@ code {
     </header>
 
     <!-- Begin page content -->
-    <main role="main" class="container-fluid">
-      
-      <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser's viewport.</p>
-        <a class="btn btn-lg btn-primary" href="#" role="button">Button &raquo;</a>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-sm">
+          <label for="inputState">Account Type</label>
+          <select id="inputState" class="form-control">
+            <option selected>Select</option>
+            <option >Loan</option>
+            <option >FRR</option>
+            <option >Overdraft</option>
+          </select>
+        </div>
+        <div class="col-sm">
+            <label for="exampleInputEmail1">Account Number</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Account Number">
+        </div>
+        <div class="col-sm">
+          <label for="inputState">Number of Applicants</label>
+          <select id="inputState" class="form-control">
+            <option selected>Select</option>
+            <option >1</option>
+            <option >2</option>
+            <option >3</option>
+            <option >4</option>
+            <option >5</option>
+            <option >6</option>
+            <option >7</option>
+            <option >8</option>
+            <option >9</option>
+            <option >10</option>
+          </select>
+        </div>
       </div>
+      <hr/>
+      
+        <div class="jumbotron">
+          <div >
+            <h5 class="alert alert-dark text-center" role="alert">Applicant #1 Details</h5>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <label for="inputState">Borrower Type</label>
+              <select id="inputState" class="form-control">
+                <option selected>Select</option>
+                <option >Salaried</option>
+                <option >Other Individual</option>
+              </select>
+            </div>
+            <div class="col-sm-4">
+              <label for="exampleInputEmail1">Latest Salary</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="First Borrower Name">
+            </div>
+            <div class="col-sm-4">
+              <label for="exampleInputEmail1">Salary in Feb 2020</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="First Borrower Name">
+            </div>
+           
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-sm-8">
+              <label for="exampleInputEmail1">Customer Name</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="First Borrower Name">
+            </div>
+            
+            <div class="col-sm-4"style="text-align:center;">
+              <label>Percentage reduction in salary</label><br/>
+              <h3 class="badge badge-danger" style="font-size: x-large;">25%</h3>
+            </div>
+          </div>
+            
+          </div>
+          <!-- <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser's viewport.</p>
+          <a class="btn btn-lg btn-primary" href="#" role="button">Button &raquo;</a> -->
+        </div>
+      
     </main>
 
     <footer class="footer">
@@ -93,11 +165,45 @@ code {
         <span class="text-muted">Copyright Here</span>
       </div>
     </footer>
-
+ 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script type="text/javascript">
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var myPieChart = new Chart(ctx, {
+          type: 'pie',
+          data: {
+            datasets: [{
+                data: [10, 20, 30]
+            }],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1,
+            // These labels appear in the legend and in the tooltips when hovering different arcs
+            labels: [
+                'Red',
+                'Yellow',
+                'Blue'
+            ]
+        },
+          options: {}
+      });
+    // The data for our dataset
+   
+    </script> -->
+    <script>
+    </script>
   </body>
 </html>
