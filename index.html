@@ -62,8 +62,8 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-           <!--<ul class="navbar-nav mr-auto">
+        <!--<div class="collapse navbar-collapse" id="navbarCollapse">
+           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
@@ -77,8 +77,8 @@
          <!-- <form class="form-inline mt-2 mt-md-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>-->
-        </div>
+          </form>
+        </div>-->
       </nav>
     </header>
 
@@ -86,12 +86,27 @@
     <main role="main" class="container">
       <div class="row">
         <div class="col-sm">
-          <label for="inputState">Account Type</label>
-          <select id="inputState" class="form-control">
+          <label for="accType">Account Type</label>
+          <select id="accType" class="form-control">
             <option selected>Select</option>
             <option >Loan</option>
             <option >FRR</option>
             <option >Overdraft</option>
+          </select>
+        </div>
+        <div class="col-sm">
+          <label for="accScheme">Scheme</label>
+          <select id="accScheme" class="form-control">
+            <option selected>Select</option>
+            <option >Home Loan</option>
+            <option >Top-up Loan</option>
+            <option >Auto Loan</option>
+            <option >Education Loan</option>
+            <option >Mortgage Loan</option>
+            <option >Personal Loan</option>
+            <option >Gold Loan</option>
+            <option >Loan Against LIP</option>
+
           </select>
         </div>
         <div class="col-sm">
@@ -153,7 +168,7 @@
             </div>
           </div>
             
-          </div>
+          
           <!-- <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser's viewport.</p>
           <a class="btn btn-lg btn-primary" href="#" role="button">Button &raquo;</a> -->
         </div>
