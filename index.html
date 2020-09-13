@@ -21,77 +21,129 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <!--<div class="collapse navbar-collapse" id="navbarCollapse">
-           <ul class="navbar-nav mr-auto">
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <!-- <p class="text-white navbar-nav mr-auto">sdfdf</p> -->
+           <ul class="navbar-nav" style="margin-left: auto!important;">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="#">
+                <span class="badge badge-primary">SOL ID: 2904</span>
+              </a>
             </li>
-           <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+           <li class="nav-item active">
+              <a class="nav-link" href="#">
+                <span class="badge badge-success">EC No. 112233</span>
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
+              <a class="nav-link" href="#">
+                <span class="badge badge-warning">Name: Mohit</span>
+              </a>
             </li>
-          </ul>-->
-         <!-- <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        </div>-->
+          </ul> 
+         
+        </div>
       </nav>
     </header>
 
     <!-- Begin page content -->
     <main role="main" class="container">
-      <div class="row">
-        <div class="col-sm">
-          <label for="accType">Account Type</label>
-          <select id="accType" class="form-control">
-            <option value="" selected disabled>Select</option>
-            <option value="loan">Loan</option>
-            <option value="frr">FRR</option>
-            <option value="od">Overdraft</option>
-          </select>
-        </div>
-        <div class="col-sm">
-          <label for="accScheme">Scheme</label>
-          <select id="accScheme" class="form-control" disabled>
-             <option selected disabled>Select</option>
-           <!-- <option >Home Loan</option>
-            <option >Top-up Loan</option>
-            <option >Auto Loan</option>
-            <option >Education Loan</option>
-            <option >Mortgage Loan</option>
-            <option >Personal Loan</option>
-            <option >Gold Loan</option>
-            <option >Loan Against LIP</option> -->
-
-          </select>
-        </div>
-        <div class="col-sm">
-            <label for="accNo">Account Number</label>
-            <input type="tel" class="form-control" id="accNo" placeholder="Enter Account Number">
-        </div>
-        <div class="col-sm">
-          <label for="noOfApplicant">Number of Applicants</label>
-          <select id="noOfApplicant" class="form-control">
-            <option selected>Select</option>
-            <option >1</option>
-            <option >2</option>
-            <option >3</option>
-            <option >4</option>
-            <option >5</option>
-            <option >6</option>
-            <option >7</option>
-            <option >8</option>
-            <option >9</option>
-            <option >10</option>
-          </select>
+      <div class="card bg-light">
+        <div class="card-header">Account Related Information</div>
+        <div class="card-body">
+          <!--ROW 1 STARTS HERE-->
+          <div class="row">
+            <div class="col-sm">
+              <label for="accType">Account Type</label>
+              <select id="accType" class="form-control">
+                <option value="" selected disabled>Select</option>
+                <option value="loan">Loan</option>
+                <option value="frr">FRR</option>
+                <option value="od">Overdraft</option>
+              </select>
+            </div>
+            <div class="col-sm">
+              <label for="accScheme">Scheme</label>
+              <select id="accScheme" class="form-control" disabled>
+                 <option selected disabled>Select</option>
+                 <!-- Options will be loaded dynamically with JS -->
+              </select>
+            </div>
+            <div class="col-sm">
+                <label for="accNo">Account Number</label>
+                <input type="tel" class="form-control" id="accNo" placeholder="Enter Account Number">
+            </div>
+            <div class="col-sm">
+              <label for="noOfApplicant">Number of Applicants</label>
+              <select id="noOfApplicant" class="form-control">
+                <option selected>Select</option>
+                <option >1</option>
+                <option >2</option>
+                <option >3</option>
+                <option >4</option>
+                <option >5</option>
+                <option >6</option>
+                <option >7</option>
+                <option >8</option>
+                <option >9</option>
+                <option >10</option>
+              </select>
+            </div>
+            <div class="col-sm">
+              <label for="sanctndAmt">Sanctioned Amount</label>
+              <input type="tel" class="form-control" id="sanctndAmt" placeholder="Enter Value">
+            </div>
+          </div>
+          <!--ROW 1 ENDS HERE-->
+          <br/>
+          <!--ROW 2 STARTS HERE-->
+          <div class = "row">
+            <div class="col-sm-3">
+              <label for="sanctLTV">Santioned LTV</label>
+              <input type="tel" class="form-control" id="sanctLTV" placeholder="Enter Value">
+            </div>
+            <div class="col-sm-3">
+              <label for="schmLTV">Schematic LTV</label>
+              <input type="tel" class="form-control" id="schmLTV" placeholder="Enter Value">
+            </div>
+            <div class="col-sm-3">
+              <label for="prsntOutstdng">Present Outstanding</label>
+              <input type="tel" class="form-control" id="prsntOutstdng" placeholder="Enter Value">
+            </div>
+            <div class="col-sm-3">
+              <label for="valOfSecurity">Value of Security</label>
+              <input type="tel" class="form-control" id="valOfSecurity" placeholder="Enter Value">
+            </div>
+          </div>
+          <!--ROW 2 ENDS HERE-->
+          <br/>
+          <!--ROW 3 STARTS HERE-->
+          <div class = "row">
+            <div class="col-sm-3">
+              <label for="unsrvcdInt">Unserviced Interest</label>
+              <input type="tel" class="form-control" id="unsrvcdInt" placeholder="Enter Value">
+            </div>
+            <div class="col-sm-3">
+              <label for="estIntMoratorium">Moratorium Estimated interest</label>
+              <input type="tel" class="form-control" id="estIntMoratorium" placeholder="Enter Value">
+            </div>
+            
+            <div class="col-sm-3">
+              <label for="blncLoanTenure">Loan Balance Tenure(in months)</label>
+              <input type="tel" class="form-control" id="blncLoanTenure" placeholder="Enter Value">
+            </div>
+            <div class="col-sm-3">
+              <label for="blncLoanTenure">Balance Period upto Retirement</label>
+              <input type="tel" class="form-control" id="blncLoanTenure" placeholder="Enter Value">
+            </div>
+          </div>
+          <!--ROW 3 ENDS HERE-->
         </div>
       </div>
+      
+    
       <hr/>
       
-      <div >
+      <div id="applicants">
         <div class="jumbotron">
           <div >
             <h5 class="alert alert-dark text-center" role="alert">Applicant #1 Details</h5>

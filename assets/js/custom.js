@@ -42,8 +42,22 @@ $(document).ready(function(){
     });
 
 
-    $("#accType").change(function() {
+    $("#noOfApplicant").change(function() {
         
+       
+
+        var $div = $('div[id^="applicant1"]:last');
+        console.log($div);
+
+        // Read the Number from that DIV's ID (i.e: 3 from "klon3")
+        // And increment that number by 1
+        var num = parseInt( $div.prop("id").match(/\d+/g), 10 ) +1;
+
+        // Clone it and assign the new ID (i.e: from num 4 to ID "klon4")
+        var $klon = $div.clone().prop('id', 'applicant'+num );
+        console.log($klon);
+        // Finally insert $klon wherever you want
+        $div.after( $klon );
     });
 
 
