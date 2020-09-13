@@ -1,166 +1,170 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="./assets/css/custom.css" >
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
 
-    <title>Retail</title>
-  </head>
-  <body>
-    <header>
-      <!-- Fixed navbar -->
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">Logo Goes Here</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <!-- <p class="text-white navbar-nav mr-auto">sdfdf</p> -->
-           <ul class="navbar-nav" style="margin-left: auto!important;">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">
-                <span class="badge badge-primary">SOL ID: 2904</span>
-              </a>
-            </li>
-           <li class="nav-item active">
-              <a class="nav-link" href="#">
-                <span class="badge badge-success">EC No. 112233</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span class="badge badge-warning">Name: Mohit</span>
-              </a>
-            </li>
-          </ul> 
-         
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="./assets/css/custom.css">
+
+  <title>Retail</title>
+</head>
+
+<body>
+  <header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">Logo Goes Here</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <!-- <p class="text-white navbar-nav mr-auto">sdfdf</p> -->
+        <ul class="navbar-nav" style="margin-left: auto!important;">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">
+              <span class="badge badge-primary">SOL ID: 2904</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">
+              <span class="badge badge-success">EC No. 112233</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span class="badge badge-warning">Name: Mohit</span>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+    </nav>
+  </header>
+
+  <!-- Begin page content -->
+  <main role="main" class="container">
+    <div class="card bg-light">
+      <div class="card-header">Account Related Information</div>
+      <div class="card-body">
+        <!--ROW 1 STARTS HERE-->
+        <div class="row">
+          <div class="col-sm">
+            <label for="accType">Account Type</label>
+            <select id="accType" class="form-control">
+              <option value="" selected disabled>Select</option>
+              <option value="loan">Loan</option>
+              <option value="frr">FRR</option>
+              <option value="od">Overdraft</option>
+            </select>
+          </div>
+          <div class="col-sm">
+            <label for="accScheme">Scheme</label>
+            <select id="accScheme" class="form-control" disabled>
+              <option selected disabled>Select</option>
+              <!-- Options will be loaded dynamically with JS -->
+            </select>
+          </div>
+          <div class="col-sm">
+            <label for="accNo">Account Number</label>
+            <input type="tel" class="form-control" id="accNo" placeholder="Enter Account Number">
+          </div>
+          <div class="col-sm">
+            <label for="noOfApplicant">Number of Applicants</label>
+            <select id="noOfApplicant" class="form-control">
+              <option selected value="0">Select</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+            </select>
+          </div>
+          <div class="col-sm">
+            <label for="sanctndAmt">Sanctioned Amount</label>
+            <input type="tel" class="form-control" id="sanctndAmt" placeholder="Enter Value">
+          </div>
         </div>
-      </nav>
-    </header>
-
-    <!-- Begin page content -->
-    <main role="main" class="container">
-      <div class="card bg-light">
-        <div class="card-header">Account Related Information</div>
-        <div class="card-body">
-          <!--ROW 1 STARTS HERE-->
-          <div class="row">
-            <div class="col-sm">
-              <label for="accType">Account Type</label>
-              <select id="accType" class="form-control">
-                <option value="" selected disabled>Select</option>
-                <option value="loan">Loan</option>
-                <option value="frr">FRR</option>
-                <option value="od">Overdraft</option>
-              </select>
-            </div>
-            <div class="col-sm">
-              <label for="accScheme">Scheme</label>
-              <select id="accScheme" class="form-control" disabled>
-                 <option selected disabled>Select</option>
-                 <!-- Options will be loaded dynamically with JS -->
-              </select>
-            </div>
-            <div class="col-sm">
-                <label for="accNo">Account Number</label>
-                <input type="tel" class="form-control" id="accNo" placeholder="Enter Account Number">
-            </div>
-            <div class="col-sm">
-              <label for="noOfApplicant">Number of Applicants</label>
-              <select id="noOfApplicant" class="form-control">
-                <option selected>Select</option>
-                <option >1</option>
-                <option >2</option>
-                <option >3</option>
-                <option >4</option>
-                <option >5</option>
-                <option >6</option>
-                <option >7</option>
-                <option >8</option>
-                <option >9</option>
-                <option >10</option>
-              </select>
-            </div>
-            <div class="col-sm">
-              <label for="sanctndAmt">Sanctioned Amount</label>
-              <input type="tel" class="form-control" id="sanctndAmt" placeholder="Enter Value">
-            </div>
+        <!--ROW 1 ENDS HERE-->
+        <br />
+        <!--ROW 2 STARTS HERE-->
+        <div class="row">
+          <div class="col-sm-3">
+            <label for="sanctLTV">Santioned LTV</label>
+            <input type="tel" class="form-control" id="sanctLTV" placeholder="Enter Value">
           </div>
-          <!--ROW 1 ENDS HERE-->
-          <br/>
-          <!--ROW 2 STARTS HERE-->
-          <div class = "row">
-            <div class="col-sm-3">
-              <label for="sanctLTV">Santioned LTV</label>
-              <input type="tel" class="form-control" id="sanctLTV" placeholder="Enter Value">
-            </div>
-            <div class="col-sm-3">
-              <label for="schmLTV">Schematic LTV</label>
-              <input type="tel" class="form-control" id="schmLTV" placeholder="Enter Value">
-            </div>
-            <div class="col-sm-3">
-              <label for="prsntOutstdng">Present Outstanding</label>
-              <input type="tel" class="form-control" id="prsntOutstdng" placeholder="Enter Value">
-            </div>
-            <div class="col-sm-3">
-              <label for="valOfSecurity">Value of Security</label>
-              <input type="tel" class="form-control" id="valOfSecurity" placeholder="Enter Value">
-            </div>
+          <div class="col-sm-3">
+            <label for="schmLTV">Schematic LTV</label>
+            <input type="tel" class="form-control" id="schmLTV" placeholder="Enter Value">
           </div>
-          <!--ROW 2 ENDS HERE-->
-          <br/>
-          <!--ROW 3 STARTS HERE-->
-          <div class = "row">
-            <div class="col-sm-3">
-              <label for="unsrvcdInt">Unserviced Interest</label>
-              <input type="tel" class="form-control" id="unsrvcdInt" placeholder="Enter Value">
-            </div>
-            <div class="col-sm-3">
-              <label for="estIntMoratorium">Moratorium Estimated interest</label>
-              <input type="tel" class="form-control" id="estIntMoratorium" placeholder="Enter Value">
-            </div>
-            
-            <div class="col-sm-3">
-              <label for="blncLoanTenure">Loan Balance Tenure(in months)</label>
-              <input type="tel" class="form-control" id="blncLoanTenure" placeholder="Enter Value">
-            </div>
-            <div class="col-sm-3">
-              <label for="blncLoanTenure">Balance Period upto Retirement</label>
-              <input type="tel" class="form-control" id="blncLoanTenure" placeholder="Enter Value">
-            </div>
+          <div class="col-sm-3">
+            <label for="prsntOutstdng">Present Outstanding</label>
+            <input type="tel" class="form-control" id="prsntOutstdng" placeholder="Enter Value">
           </div>
-          <!--ROW 3 ENDS HERE-->
+          <div class="col-sm-3">
+            <label for="valOfSecurity">Value of Security</label>
+            <input type="tel" class="form-control" id="valOfSecurity" placeholder="Enter Value">
+          </div>
         </div>
-      </div>
-      
-      <hr/>
-      
-      <!--Applicant Details Start here-->
-      <div id="applicants">
+        <!--ROW 2 ENDS HERE-->
+        <br />
+        <!--ROW 3 STARTS HERE-->
+        <div class="row">
+          <div class="col-sm-3">
+            <label for="unsrvcdInt">Unserviced Interest</label>
+            <input type="tel" class="form-control" id="unsrvcdInt" placeholder="Enter Value">
+          </div>
+          <div class="col-sm-3">
+            <label for="estIntMoratorium">Moratorium Estimated interest</label>
+            <input type="tel" class="form-control" id="estIntMoratorium" placeholder="Enter Value">
+          </div>
 
+          <div class="col-sm-3">
+            <label for="blncLoanTenure">Loan Balance Tenure(in months)</label>
+            <input type="tel" class="form-control" id="blncLoanTenure" placeholder="Enter Value">
+          </div>
+          <div class="col-sm-3">
+            <label for="blncLoanTenure">Balance Period upto Retirement</label>
+            <input type="tel" class="form-control" id="blncLoanTenure" placeholder="Enter Value">
+          </div>
+        </div>
+        <!--ROW 3 ENDS HERE-->
       </div>
-      <!--Applicant Details Start here-->
-    </main>
+    </div>
 
-    <footer class="footer">
-      <div class="container">
-        <span class="text-muted">Copyright Here</span>
-      </div>
-    </footer>
- 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="./assets/js/jquery-3.2.1.slim.min.js"></script>
-    <script src="./assets/js/popper.min.js"></script>
-    <script src="./assets/js/bootstrap.min.js"></script>
-    <script src="./assets/js/custom.js"></script>
-    
-  </body>
+    <hr />
+
+    <!--Applicant Details Start here-->
+    <div id="applicants">
+
+    </div>
+    <!--Applicant Details Start here-->
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <span class="text-muted">Copyright Here</span>
+    </div>
+  </footer>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="./assets/js/jquery-3.2.1.slim.min.js"></script>
+  <script src="./assets/js/popper.min.js"></script>
+  <script src="./assets/js/bootstrap.min.js"></script>
+  <script src="./assets/js/custom.js"></script>
+
+</body>
+
 </html>
