@@ -58,15 +58,15 @@ $(document).ready(function () {
             ' Details</h5></div><div class="row"><div class="col-sm-3"><label for="borrowerType-'+ i + '">Borrower Type</label>\
                 <select id="borrowerType-'+ i + '" class="form-control" '+isFRR+'><option selected>Select</option><option >Salaried</option>\
                   <option >Other Individual</option></select></div><div class="col-sm-3"><label for="latestSal-'+ i + 
-                  '">Latest Salary/GMBR/Rent</label><input type="email" class="form-control" id="latestSal-'+ i + 
+                  '">Latest Salary/GMBR/Rent</label><input type="tel" class="form-control" id="latestSal-'+ i + 
                   '"  placeholder="Enter Value"></div><div class="col-sm-3"><label for="feb20Salary-'+ i + 
-                  '">Salary/Rent in Feb 2020</label><input type="email" class="form-control" id="feb20Salary-'+ i + 
+                  '">Salary/Rent in Feb 2020</label><input type="tel" class="form-control" id="feb20Salary-'+ i + 
                   '" placeholder="Enter Value"></div><div class="col-sm-3"><label for="totalDeduction-'+ i + 
-                  '">Total Deduction</label><input type="email" class="form-control" id="totalDeduction-'+ i + 
+                  '">Total Deduction</label><input type="tel" class="form-control" id="totalDeduction-'+ i + 
                   '" placeholder="Enter Value"></div></div><br/><div class="row"><div class="col-sm-6"><label for="borrowerName-'+ i + 
-                  '">Customer Name</label><input type="email" class="form-control" id="borrowerName-'+ i + 
+                  '">Customer Name</label><input type="text" class="form-control" id="borrowerName-'+ i + 
                   '" placeholder="Enter Name"></div><div class="col-sm-3"><label for="unservicedInt-'+ i + 
-                  '">Unserviced Interest</label><input type="email" class="form-control" id="unservicedInt-'+ i + 
+                  '">Unserviced Interest</label><input type="tel" class="form-control" id="unservicedInt-'+ i + 
                   '" placeholder="Enter Value" '+isOD+'></div><div class="col-sm-3"style="text-align:center;"><label>Percentage reduction in salary</label><br/>\
                     <h3 class="badge badge-danger" style="font-size: x-large;" id="borrowerImpact-'+ i + 
                 '"></h3></div></div></div>';
@@ -89,12 +89,12 @@ $(document).ready(function () {
             $('#borrowerImpact-'+elemIndex).html("");
         });
 
-        var calculateStress = function(latestInc=0, feb20Inc=0){
+        var calculateStress = function(latestInc, feb20Inc){
             console.log(latestInc +"\n"+ feb20Inc);
             console.log(feb20Inc-latestInc);
             return (((feb20Inc-latestInc)/latestInc)*100).toFixed(2);
 
-        }
+        };
 
        
     });
