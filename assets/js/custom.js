@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+    $('[data-toggle="tooltip"]').tooltip();
+
     var loanOptions = {
         "Home Loan": "HL",
         "Top-up Loan": "TL",
@@ -16,7 +18,7 @@ $(document).ready(function () {
         "Personal Loan OD": "PLOD"
     };
 
-    var isFRR = "" , isOD = "disabled"; //for enabling and disabling borrower type dropdown
+    var isFRR = "" ; //for enabling and disabling borrower type dropdown
     $("#accType").change(function () {
         var selectedAccType = $('option:selected', this).val();
         var $el = $("#accScheme");
@@ -24,26 +26,29 @@ $(document).ready(function () {
         $('#applicants').empty(); // reset  borrower/coapplicant div
         $("#noOfApplicant").val("0"); // reset coapplicant dropdown to 0
         isFRR = ""; //to disable borrower type dropdown
-        isOD = "disabled" //to disable Unserviced Interest textbox
+        //isOD = "disabled" //to disable Unserviced Interest textbox
         if ("loan" === selectedAccType) {
             $.each(loanOptions, function (key, value) {
                 $el.append($("<option></option>")
                     .attr("value", value).text(key));
             });
             $el.removeAttr("disabled");
+            $('#unsrvcdInt').attr('disabled', true);
         } else if ("frr" === selectedAccType) {
             isFRR = "disabled";
             $el.append($("<option></option>")
                 .attr("value", "frr").text("FRR")
             );
             $el.attr('disabled', true);
+            $('#unsrvcdInt').attr('disabled', true);
         } else if ("od" === selectedAccType) {
-            isOD= "";
+            //isOD= "";
             $.each(odOptions, function (key, value) {
                 $el.append($("<option></option>")
                     .attr("value", value).text(key));
             });
             $el.removeAttr("disabled");
+            $('#unsrvcdInt').removeAttr("disabled");
         } else {
             $el.attr('disabled', true);
         }
@@ -63,11 +68,9 @@ $(document).ready(function () {
                   '">Salary/Rent in Feb 2020</label><input type="tel" class="form-control" id="feb20Salary-'+ i + 
                   '" placeholder="Enter Value"></div><div class="col-sm-3"><label for="totalDeduction-'+ i + 
                   '">Total Deduction</label><input type="tel" class="form-control" id="totalDeduction-'+ i + 
-                  '" placeholder="Enter Value"></div></div><br/><div class="row"><div class="col-sm-6"><label for="borrowerName-'+ i + 
+                  '" placeholder="Enter Value"></div></div><br/><div class="row"><div class="col-sm-8"><label for="borrowerName-'+ i + 
                   '">Customer Name</label><input type="text" class="form-control" id="borrowerName-'+ i + 
-                  '" placeholder="Enter Name"></div><div class="col-sm-3"><label for="unservicedInt-'+ i + 
-                  '">Unserviced Interest</label><input type="tel" class="form-control" id="unservicedInt-'+ i + 
-                  '" placeholder="Enter Value" '+isOD+'></div><div class="col-sm-3"style="text-align:center;"><label>Percentage reduction in salary</label><br/>\
+                  '" placeholder="Enter Name"></div><div class="col-sm-4"style="text-align:center;"><label>Percentage Reduction in Salary</label><br/>\
                     <h3 class="badge badge-danger" style="font-size: x-large;" id="borrowerImpact-'+ i + 
                 '"></h3></div></div></div>';
             $('#applicants').append(borrowerElem);

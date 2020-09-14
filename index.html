@@ -101,11 +101,15 @@
         <!--ROW 2 STARTS HERE-->
         <div class="row">
           <div class="col-sm-3">
-            <label for="sanctLTV">Santioned LTV</label>
+            <label for="sanctLTV" data-toggle="tooltip" title="LTV as per sanctioned terms">
+              Santioned LTV <sup><span class="badge badge-warning">i</span></sup>
+            </label>
             <input type="tel" class="form-control" id="sanctLTV" placeholder="Enter Value">
           </div>
           <div class="col-sm-3">
-            <label for="schmLTV">Schematic LTV</label>
+            <label for="schmLTV" data-toggle="tooltip" title="LTV as per present schematic guidelines including additional LTV in case of Mortgage Loans">
+              Schematic LTV <sup><span class="badge badge-warning">i</span></sup>
+            </label>
             <input type="tel" class="form-control" id="schmLTV" placeholder="Enter Value">
           </div>
           <div class="col-sm-3">
@@ -122,11 +126,16 @@
         <!--ROW 3 STARTS HERE-->
         <div class="row">
           <div class="col-sm-3">
-            <label for="unsrvcdInt">Unserviced Interest</label>
-            <input type="tel" class="form-control" id="unsrvcdInt" placeholder="Enter Value">
+            <label for="unsrvcdInt" data-toggle="tooltip" title="Unserviced interest after end of COVID-19 regulatory package upto date (including expected interest upto date of implementation)">
+              Unserviced Interest <sup><span class="badge badge-warning">i</span></sup>
+            </label>
+            <input type="tel" class="form-control" id="unsrvcdInt" placeholder="Enter Value" disabled>
           </div>
+         
           <div class="col-sm-3">
-            <label for="estIntMoratorium">Moratorium Estimated interest</label>
+            <label for="estIntMoratorium" data-toggle="tooltip" title="Estimated interest during moratorium">
+              Moratorium Estimated interest  <sup><span class="badge badge-warning">i</span></sup>
+            </label>
             <input type="tel" class="form-control" id="estIntMoratorium" placeholder="Enter Value">
           </div>
 
