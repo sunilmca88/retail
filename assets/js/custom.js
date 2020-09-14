@@ -92,7 +92,7 @@ $(document).ready(function () {
         var calculateStress = function(latestInc, feb20Inc){
             console.log(latestInc +"\n"+ feb20Inc);
             console.log(feb20Inc-latestInc);
-            return (((feb20Inc-latestInc)/latestInc)*100).toFixed(2);
+            return (((feb20Inc-latestInc)/feb20Inc)*100).toFixed(2);
 
         };
 
