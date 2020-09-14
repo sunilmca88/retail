@@ -14,61 +14,65 @@
     <title>Retail</title>
   </head>
   <body>
-    <main role="main" class="container">
+    <main role="main" class="container"><div class="jumbotron">
+      <div>
+        <h5 class="alert alert-dark text-center" role="alert">Applicant #1
+          Details</h5>
+      </div>
+      <div class="row">
+        <div class="col-sm-3"><label for="borrowerType-1">Borrower Type</label>
+          <select id="borrowerType-1" class="form-control" >
+            <option selected value="">Select</option>
+            <option value="sal">Salaried</option>
+            <option value="oth">Other Individual</option>
+          </select></div>
+        <div class="col-sm-3"><label id="lblIncomeLatest-+i+" for="latestInc-1
+                 ">+incomeSrc[0]+</label><input type="tel" class="form-control" id="latestInc-1
+                 " placeholder="Enter Value"></div>
+        <div class="col-sm-3"><label id="lblIncomeFeb20-+i+" for="feb20Inc-1
+                 ">+incomeSrc[1]+</label><input type="tel" class="form-control" id="feb20Inc-1
+                 " placeholder="Enter Value"></div>
+        <div class="col-sm-3">
+          <label for="totalDeduction-1">Total Deduction</label>
+          <input type="tel" class="form-control" id="totalDeduction-1" placeholder="Enter Value" >
+        </div>
+      </div>
+      <br />
 
+      <div class="row">
+        <div class="col-sm-4">
+          <label for="foir-1" data-toggle="tooltip" title="FOIR applicable as per present scheme guidelines in consonance with income level">
+            FOIR <sup><span class="badge badge-warning">i</span></sup>
+          </label>
+          <input type="tel" class="form-control" id="foir-1" placeholder="Enter Value">
+        </div>
 
+        <div class="col-sm-4">
+          <label for="1920Profit-1">
+            100% Net Profit of 2019-20 
+          </label>
+          <input type="tel" class="form-control" id="1920Profit-1" placeholder="Enter Value">
+        </div>
 
-
-
-      <div class="jumbotron">
-          <div >
-            <h5 class="alert alert-dark text-center" role="alert">Applicant #1 Details</h5>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <label for="borrowerType1">Borrower Type</label>
-              <select id="borrowerType1" class="form-control">
-                <option selected>Select</option>
-                <option >Salaried</option>
-                <option >Other Individual</option>
-              </select>
-            </div>
-            <div class="col-sm-3">
-              <label for="latestSal1">Latest Salary/GMBR/Rent</label>
-              <input type="email" class="form-control" id="latestSal1"  placeholder="Enter Value">
-            </div>
-            <div class="col-sm-3">
-              <label for="feb20Salary1">Salary/Rent in Feb 2020</label>
-              <input type="email" class="form-control" id="feb20Salary1" placeholder="Enter Value">
-            </div>
-            <div class="col-sm-3">
-              <label for="totalDeduction1">Total Deduction</label>
-              <input type="email" class="form-control" id="totalDeduction1" placeholder="Enter Value">
-            </div>          
-          </div>
-          <br/>
-          <div class="row">
-            <div class="col-sm-6">
-              <label for="borrowerName1">Customer Name</label>
-              <input type="email" class="form-control" id="borrowerName1"placeholder="Enter Name">
-            </div>
-            <div class="col-sm-3">
-              <label for="unservicedInt1">Unserviced Interest</label>
-              <input type="email" class="form-control" id="unservicedInt1"placeholder="Enter Value">
-            </div>
-            
-            <div class="col-sm-3"style="text-align:center;">
-              <label>Percentage reduction in salary</label><br/>
-              <h3 class="badge badge-danger" style="font-size: x-large;" id="borrowerImpact1">25%</h3>
-            </div>
-          </div>
+        <div class="col-sm-4">
+          <label for="1819Profit-1" data-toggle="tooltip" title="If net profit of FY 2019-20 not available">
+            100% Net Profit of FY 2018-19 <sup><span class="badge badge-warning">i</span></sup>
+          </label>
+          <input type="tel" class="form-control" id="1819Profit-1" placeholder="Enter Value">
+        </div>
       </div>
 
-
-
-
-
-    </main>
+      <br/>
+      <div class="row">
+        <div class="col-sm-8"><label for="borrowerName-1
+                 ">Customer Name</label><input type="text" class="form-control" id="borrowerName-1
+                 " placeholder="Enter Name"></div>
+        <div class="col-sm-4" style="text-align:center;"><label>Percentage Reduction in Salary</label><br />
+          <h3 class="badge badge-danger" style="font-size: x-large;" id="borrowerImpact-1
+               "></h3>
+        </div>
+      </div>
+    </div></main>
 
     <script src="./assets/js/jquery-3.2.1.slim.min.js"></script>
     <script src="./assets/js/popper.min.js"></script>
