@@ -182,34 +182,53 @@ $(document).ready(function () {
 
     };
 
+    /*******Account level object creation starts here********/
     window.accObj = {};
     var createAccObject = function(){
         accObj = {};
         console.log("Inside Create Acc Object Function : "+$accType.val());
-        var accType = $accType.val(), accSchm = $accSchm.val();
-        if(accType != null){
-            accObj.accType =  accType;
-        }else{
+        var accType = $accType.val(),
+            accSchm = $accSchm.val(),
+            accNo = $('#accNo').val().trim();
+        if(accType == null || accType == ""){
             alert("Error! Please select account type");
-        }
-        
-        if(accSchm != null){
-            accObj.scheme =  accSchm;
         }else{
-            alert("Error! Please select account scheme");
+            accObj.accType =  accType;
         }
         
+        if(accSchm == "" || accSchm == null){
+            alert("Error! Please select account scheme");
+        }else{
+            accObj.scheme =  accSchm;
+        }
         
+        if(accNo == "" || accNo.length != 14){
+            alert("Invalid Account Number")
+        }else{
+            accObj.accNo = accNo;
+        }
+        accObj.AppNo = $("#noOfApplicant").val();
+        accObj.sanctndAmt = $('#sanctndAmt').val().trim();
+        accObj.sanctndAmt = $('#sanctLTV').val().trim();
+        accObj.sanctndAmt = $('#schmLTV').val().trim();
+        accObj.sanctndAmt = $('#prsntOutstdng').val().trim();
+        accObj.sanctndAmt = $('#valOfSecurity').val().trim();
+        accObj.sanctndAmt = $('#proposedROI').val().trim();
+        accObj.sanctndAmt = $('#unsrvcdInt').val().trim();
+        accObj.sanctndAmt = $('#estIntMoratorium').val().trim();
+        accObj.sanctndAmt = $('#blncLoanTenure').val().trim();
+        accObj.sanctndAmt = $('#blncPeriodRetirement').val().trim();
+        console.log("Account Level Object : "+ JSON.stringify(accObj));
 
     };
-
+    /*******Account level object creation ends here********/
 
     window.stressObj = {};
     var resolutionFramework = [];
     var stressType = "";
     /****************Calculations Starts Here*************** */
     $('#btnCalculate').click(function(){
-        createAccObject();
+        createAccObject(); //To Create Account level object
         stressObj = {};
         resolutionFramework = [];
         stressType = "";
@@ -231,6 +250,7 @@ $(document).ready(function () {
             }else if(stressPercentage == 100){
                 caseType = "Case-11";
                 resolutionFramework = ["M2","M2R1","M2R2"];
+                stressType = "Severe Stress";
             }else{
                 caseType = "NoCase";
                 resolutionFramework = ["NA"];
