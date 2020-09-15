@@ -184,7 +184,21 @@ $(document).ready(function () {
 
     /*******Account level object creation starts here********/
     window.accObj = {};
-    var createAccObject = function(){
+
+    var sanctndAmt =  $('#sanctndAmt'),
+        sanctLTV = $('#sanctLTV'),
+        schmLTV = $('#schmLTV'),
+        prsntOutstdng = $('#prsntOutstdng'),
+        valOfSecurity = $('#valOfSecurity'),
+        proposedROI = $('#proposedROI'),
+        unsrvcdInt = $('#unsrvcdInt'),
+        estIntMoratorium = $('#estIntMoratorium'),
+        blncLoanTenure = $('#blncLoanTenure'),
+        blncPeriodRetirement = $('#blncPeriodRetirement');
+
+
+
+    function createAccObject(){
         accObj = {};
         console.log("Inside Create Acc Object Function : "+$accType.val());
         var accType = $accType.val(),
@@ -208,20 +222,30 @@ $(document).ready(function () {
             accObj.accNo = accNo;
         }
         accObj.AppNo = $("#noOfApplicant").val();
-        accObj.sanctndAmt = $('#sanctndAmt').val().trim();
-        accObj.sanctndAmt = $('#sanctLTV').val().trim();
-        accObj.sanctndAmt = $('#schmLTV').val().trim();
-        accObj.sanctndAmt = $('#prsntOutstdng').val().trim();
-        accObj.sanctndAmt = $('#valOfSecurity').val().trim();
-        accObj.sanctndAmt = $('#proposedROI').val().trim();
-        accObj.sanctndAmt = $('#unsrvcdInt').val().trim();
-        accObj.sanctndAmt = $('#estIntMoratorium').val().trim();
-        accObj.sanctndAmt = $('#blncLoanTenure').val().trim();
-        accObj.sanctndAmt = $('#blncPeriodRetirement').val().trim();
+        accObj.sanctndAmt = sanctndAmt.val().trim();
+        accObj.sanctLTV = sanctLTV.val().trim();;
+        accObj.schmLTV = schmLTV.val().trim();;
+        accObj.prsntOutstdng = prsntOutstdng.val().trim();;
+        accObj.valOfSecurity = valOfSecurity.val().trim();;
+        accObj.proposedROI = proposedROI.val().trim();
+        accObj.unsrvcdInt = unsrvcdInt.val().trim();;
+        accObj.estIntMoratorium = estIntMoratorium.val().trim();;
+        accObj.blncLoanTenure = blncLoanTenure.val().trim();
+        accObj.blncPeriodRetirement = blncPeriodRetirement.val().trim();
         console.log("Account Level Object : "+ JSON.stringify(accObj));
 
     };
     /*******Account level object creation ends here********/
+    window.LTVObj = {};
+    function calculateLTV(){
+        LTVObj.case1 = (prsntOutstdng.val().trim()/valOfSecurity.val().trim()).toFixed(2);
+        LTVObj.case2 = ((sanctndAmt.val().trim()+unsrvcdInt.val().trim())/valOfSecurity.val().trim()).toFixed(2);
+        LTVObj.case3 = ((prsntOutstdng.val().trim()+estIntMoratorium.val().trim())/valOfSecurity.val().trim()).toFixed(2);
+        LTVObj.case4 = ((sanctndAmt.val().trim()+estIntMoratorium.val().trim())/valOfSecurity.val().trim()).toFixed(2);
+        LTVObj.case5 = ((sanctndAmt.val().trim()+estIntMoratorium.val().trim()+unsrvcdInt.val().trim())/valOfSecurity.val().trim()).toFixed(2);
+        console.log("LTV Object : "+ JSON.stringify(LTVObj));
+    }
+
 
     window.stressObj = {};
     var resolutionFramework = [];
@@ -229,12 +253,14 @@ $(document).ready(function () {
     /****************Calculations Starts Here*************** */
     $('#btnCalculate').click(function(){
         createAccObject(); //To Create Account level object
+        calculateLTV(); //To Calculate LTV for all scenario
         stressObj = {};
         resolutionFramework = [];
         stressType = "";
         if( $accType.val() === "frr"){
             var stressPercentage = calculateStress($('#latestInc-1').val().trim(), $('#feb20Inc-1').val().trim());
             var caseType = "";
+            var LTV = [];
             if(stressPercentage <= 25){
                 caseType = "Case-4";
                 resolutionFramework = ["NA"];
@@ -242,25 +268,30 @@ $(document).ready(function () {
             }else if(stressPercentage > 25 && stressPercentage <= 40){
                 caseType = "Case-5";
                 resolutionFramework = ["R1","R2"];
+                LTV[0] = LTVObj.case1;
                 stressType = "Mild Stress";
             }else if(stressPercentage > 40 && stressPercentage < 100){
                 caseType = "Case-6";
                 resolutionFramework = ["R1","R2","M1","M2","M1R1","M1R2","M2R1","M2R2"];
+                LTV[0] = LTVObj.case1;
+                LTV[1] = LTVObj.case3;
                 stressType = "Severe Stress";
             }else if(stressPercentage == 100){
                 caseType = "Case-11";
                 resolutionFramework = ["M2","M2R1","M2R2"];
+                LTV[0] = LTVObj.case3;
                 stressType = "Severe Stress";
             }else{
                 caseType = "NoCase";
                 resolutionFramework = ["NA"];
             }
+            console.log(LTV);
             stressObj.stressPercentage = stressPercentage;
             stressObj.acctype = "frr";
             stressObj.case = caseType;
             stressObj.stressType = stressType;
+            stressObj.LTV = LTV;
             stressObj.resolutionFramework = resolutionFramework; 
-            //console.log("stressObj Key : "+ stressObj.stressPercentage);
             console.log("stressObj : "+ JSON.stringify(stressObj));
 
             //console.log("JSON Parse : "+JSON.parse(stressObj));
