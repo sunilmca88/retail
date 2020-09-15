@@ -41,3 +41,17 @@
           padding: 2rem 2rem;
       }
       
+
+      .float{
+        position:fixed;
+        /* width:60px; */
+        height:90px; 
+        bottom:20px;
+        right:10px;
+        /* background-color:#0C9; */
+        color:#FFF;
+        border-radius:50px; 
+        text-align:center;
+        z-index: 1000;
+        /* box-shadow: 2px 2px 3px #999; */
+      }

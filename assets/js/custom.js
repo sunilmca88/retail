@@ -3,6 +3,7 @@ $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
 
     var loanOptions = {
+        "Select":"0",
         "Home Loan": "HL",
         "Top-up Loan": "TL",
         "Auto Loan": "AL",
@@ -13,27 +14,53 @@ $(document).ready(function () {
         "Gold Loan": "GL"
     };
     var odOptions = {
+        "Select":"0",
         "Home Loan OD": "HLOD",
         "Mortgage Loan OD": "MLOD",
         "Personal Loan OD": "PLOD"
     };
 
+    var noOfApplicantOpt = {
+        "1":"1",
+        "2":"2",
+        "3":"3",
+        "4":"4",
+        "5":"5",
+        "6":"6",
+        "7":"7",
+        "8":"8",
+        "9":"9",
+        "10":"10"
+    };
     var isFRR = "" ; //for enabling and disabling borrower type dropdown
     var incomeSrc = ["Latest Sal/Rent/GMBR","Sal/Rent/GMBR of Feb 2020"];
     $("#accType").change(function () {
+        var $noOfApplicant = $("#noOfApplicant");
+        $noOfApplicant.removeAttr('disabled');
+        $noOfApplicant.empty();
         var selectedAccType = $('option:selected', this).val();
         var $el = $("#accScheme");
         $el.empty();
         $('#applicants').empty(); // reset  borrower/coapplicant div
-        $("#noOfApplicant").val("0"); // reset coapplicant dropdown to 0
+        //$("#noOfApplicant").val("0"); // reset coapplicant dropdown to 0
         isFRR = ""; //to disable borrower type dropdown
         incomeSrc = ["Latest Sal/Rent/GMBR","Sal/Rent/GMBR of feb 2020"];
         if ("loan" === selectedAccType) {
+            /********Updating Scheme Options Starts here**************/
             $.each(loanOptions, function (key, value) {
                 $el.append($("<option></option>")
                     .attr("value", value).text(key));
             });
+            /********Updating Scheme Options Ends here**************/
             $el.removeAttr("disabled");
+            
+            /********Updating No of Applicants Options Starts here**************/
+            $.each(noOfApplicantOpt, function (key, value) {
+                $noOfApplicant.append($("<option></option>")
+                    .attr("value", value).text(key));
+            });
+            /********Updating No of Applicants Options Ends here**************/
+            
             $('#unsrvcdInt').val("").attr('disabled', true);
             $('#sanctndAmt').val("").attr('disabled', true);
         } else if ("frr" === selectedAccType) {
@@ -42,22 +69,40 @@ $(document).ready(function () {
                 .attr("value", "frr").text("FRR")
             );
             $el.attr('disabled', true);
+
+            /********Updating No of Applicants Options Starts here**************/
+            $noOfApplicant.append($("<option></option>")
+                .attr("value", "1").text("1")).attr('disabled',true);
+            /********Updating No of Applicants Options Ends here**************/
+            
+
             $('#unsrvcdInt').val("").attr('disabled', true);
             $('#sanctndAmt').val("").attr('disabled', true);
             incomeSrc =  ["Latest Rent", "Rent in Feb 2020"];
         } else if ("od" === selectedAccType) {
             //isOD= "";
+            /********Updating Scheme Options Starts here**************/
             $.each(odOptions, function (key, value) {
                 $el.append($("<option></option>")
                     .attr("value", value).text(key));
             });
+            /********Updating Scheme Options Ends here**************/
             $el.removeAttr("disabled");
+            
+            /********Updating No of Applicants Options Starts here**************/
+             $.each(noOfApplicantOpt, function (key, value) {
+                $noOfApplicant.append($("<option></option>")
+                    .attr("value", value).text(key));
+            });
+            /********Updating No of Applicants Options Ends here**************/
+
             $('#unsrvcdInt').removeAttr("disabled");
             $('#sanctndAmt').removeAttr("disabled");
             
         } else {
             $el.attr('disabled', true);
         }
+        $noOfApplicant.val("1").change();
     });
 
 
@@ -107,36 +152,37 @@ $(document).ready(function () {
         });
 
             
-    $("[id^='borrowerType']" ).change(function () {
-        var elemIndex = $(this).attr('id').split('-')[1];
-        var selectedBorrowerType = $('option:selected', this).val();
-        console.log(elemIndex);
-        console.log(selectedBorrowerType);
-        if(selectedBorrowerType === "sal"){
-            $('#lblIncomeLatest-'+elemIndex).text("Latest Salary");
-            $('#lblIncomeFeb20-'+elemIndex).text("Salary in Feb 2020");
-            $('#1920Profit-'+elemIndex).val("").attr('disabled', true);
-            $('#1819Profit-'+elemIndex).val("").attr('disabled', true);
-        }else  if(selectedBorrowerType === "oth"){
-            $('#lblIncomeLatest-'+elemIndex).text("Latest GMBR");
-            $('#lblIncomeFeb20-'+elemIndex).text("Previous GMBR");
-            $('#1920Profit-'+elemIndex).val("").removeAttr('disabled')
-            $('#1819Profit-'+elemIndex).val("").removeAttr('disabled')
-        }else{
-            $('#lblIncomeLatest-'+elemIndex).text("");
-            $('#lblIncomeFeb20-'+elemIndex).text("");
-        }
+        $("[id^='borrowerType']" ).change(function () {
+            var elemIndex = $(this).attr('id').split('-')[1];
+            var selectedBorrowerType = $('option:selected', this).val();
+            console.log(elemIndex);
+            console.log(selectedBorrowerType);
+            if(selectedBorrowerType === "sal"){
+                $('#lblIncomeLatest-'+elemIndex).text("Latest Salary");
+                $('#lblIncomeFeb20-'+elemIndex).text("Salary in Feb 2020");
+                $('#1920Profit-'+elemIndex).val("").attr('disabled', true);
+                $('#1819Profit-'+elemIndex).val("").attr('disabled', true);
+            }else  if(selectedBorrowerType === "oth"){
+                $('#lblIncomeLatest-'+elemIndex).text("Latest GMBR");
+                $('#lblIncomeFeb20-'+elemIndex).text("Previous GMBR");
+                $('#1920Profit-'+elemIndex).val("").removeAttr('disabled')
+                $('#1819Profit-'+elemIndex).val("").removeAttr('disabled')
+            }else{
+                $('#lblIncomeLatest-'+elemIndex).text("");
+                $('#lblIncomeFeb20-'+elemIndex).text("");
+            }
+        });
     });
+    var calculateStress = function(latestInc, feb20Inc){
+        console.log(latestInc +"\n"+ feb20Inc);
+        console.log(feb20Inc-latestInc);
+        return (((feb20Inc-latestInc)/feb20Inc)*100).toFixed(2);
 
-        var calculateStress = function(latestInc, feb20Inc){
-            console.log(latestInc +"\n"+ feb20Inc);
-            console.log(feb20Inc-latestInc);
-            return (((feb20Inc-latestInc)/feb20Inc)*100).toFixed(2);
-
-        };
-
-       
-    });
+    };
 
 
+
+    /****************Calculations Starts Here*************** */
+
+    /****************Calculations Ends Here*************** */
 });
