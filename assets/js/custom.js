@@ -181,8 +181,47 @@ $(document).ready(function () {
     };
 
 
-
+    window.stressObj = {};
+    var resolutionFramework = [];
+    var stressType = "";
     /****************Calculations Starts Here*************** */
+    $('#btnCalculate1').click(function(){
+        stressObj = {};
+        resolutionFramework = [];
+        stressType = "";
+        if( $("#accType").val() === "frr"){
+            var stressPercentage = calculateStress($('#latestInc-1').val().trim(), $('#feb20Inc-1').val().trim());
+            var caseType = "";
+            if(stressPercentage <= 25){
+                caseType = "Case-4";
+                resolutionFramework = ["NA"];
+                stressType = "Minimum Stress";
+            }else if(stressPercentage > 25 && stressPercentage <= 40){
+                caseType = "Case-5";
+                resolutionFramework = ["R1","R2"];
+                stressType = "Mild Stress";
+            }else if(stressPercentage > 40 && stressPercentage < 100){
+                caseType = "Case-6";
+                resolutionFramework = ["R1","R2","M1","M2","M1R1","M1R2","M2R1","M2R2"];
+                stressType = "Severe Stress";
+            }else if(stressPercentage == 100){
+                caseType = "Case-11";
+            }else{
+                caseType = "NoCase";
+            }
+            stressObj.stressPercentage = stressPercentage;
+            stressObj.acctype = "frr";
+            stressObj.case = caseType;
+            stressObj.stressType = stressType;
+            stressObj.resolutionFramework = resolutionFramework; 
+            //console.log("stressObj Key : "+ stressObj.stressPercentage);
+            console.log("stressObj : "+ JSON.stringify(stressObj));
 
+            //console.log("JSON Parse : "+JSON.parse(stressObj));
+        }else{
+            console.log("None");
+        }
+    });
+    
     /****************Calculations Ends Here*************** */
 });
