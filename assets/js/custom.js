@@ -3,7 +3,7 @@ $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
 
     var loanOptions = {
-        "Select":"0",
+        "Select":"",
         "Home Loan": "HL",
         "Top-up Loan": "TL",
         "Auto Loan": "AL",
@@ -14,7 +14,7 @@ $(document).ready(function () {
         "Gold Loan": "GL"
     };
     var odOptions = {
-        "Select":"0",
+        "Select":"",
         "Home Loan OD": "HLOD",
         "Mortgage Loan OD": "MLOD",
         "Personal Loan OD": "PLOD"
@@ -34,13 +34,15 @@ $(document).ready(function () {
     };
     var isFRR = "" ; //for enabling and disabling borrower type dropdown
     var incomeSrc = ["Latest Sal/Rent/GMBR","Sal/Rent/GMBR of Feb 2020"];
-    $("#accType").change(function () {
+    var $accType = $("#accType");
+    var $accSchm = $("#accScheme");
+    $accType.change(function () {
         var $noOfApplicant = $("#noOfApplicant");
         $noOfApplicant.removeAttr('disabled');
         $noOfApplicant.empty();
         var selectedAccType = $('option:selected', this).val();
-        var $el = $("#accScheme");
-        $el.empty();
+        
+        $accSchm.empty();
         $('#applicants').empty(); // reset  borrower/coapplicant div
         //$("#noOfApplicant").val("0"); // reset coapplicant dropdown to 0
         isFRR = ""; //to disable borrower type dropdown
@@ -48,11 +50,11 @@ $(document).ready(function () {
         if ("loan" === selectedAccType) {
             /********Updating Scheme Options Starts here**************/
             $.each(loanOptions, function (key, value) {
-                $el.append($("<option></option>")
+                $accSchm.append($("<option></option>")
                     .attr("value", value).text(key));
             });
             /********Updating Scheme Options Ends here**************/
-            $el.removeAttr("disabled");
+            $accSchm.removeAttr("disabled");
             
             /********Updating No of Applicants Options Starts here**************/
             $.each(noOfApplicantOpt, function (key, value) {
@@ -65,10 +67,10 @@ $(document).ready(function () {
             $('#sanctndAmt').val("").attr('disabled', true);
         } else if ("frr" === selectedAccType) {
             isFRR = "disabled";
-            $el.append($("<option></option>")
+            $accSchm.append($("<option></option>")
                 .attr("value", "frr").text("FRR")
             );
-            $el.attr('disabled', true);
+            $accSchm.attr('disabled', true);
 
             /********Updating No of Applicants Options Starts here**************/
             $noOfApplicant.append($("<option></option>")
@@ -83,11 +85,11 @@ $(document).ready(function () {
             //isOD= "";
             /********Updating Scheme Options Starts here**************/
             $.each(odOptions, function (key, value) {
-                $el.append($("<option></option>")
+                $accSchm.append($("<option></option>")
                     .attr("value", value).text(key));
             });
             /********Updating Scheme Options Ends here**************/
-            $el.removeAttr("disabled");
+            $accSchm.removeAttr("disabled");
             
             /********Updating No of Applicants Options Starts here**************/
              $.each(noOfApplicantOpt, function (key, value) {
@@ -100,7 +102,7 @@ $(document).ready(function () {
             $('#sanctndAmt').removeAttr("disabled");
             
         } else {
-            $el.attr('disabled', true);
+            $accSchm.attr('disabled', true);
         }
         $noOfApplicant.val("1").change();
     });
@@ -180,16 +182,38 @@ $(document).ready(function () {
 
     };
 
+    window.accObj = {};
+    var createAccObject = function(){
+        accObj = {};
+        console.log("Inside Create Acc Object Function : "+$accType.val());
+        var accType = $accType.val(), accSchm = $accSchm.val();
+        if(accType != null){
+            accObj.accType =  accType;
+        }else{
+            alert("Error! Please select account type");
+        }
+        
+        if(accSchm != null){
+            accObj.scheme =  accSchm;
+        }else{
+            alert("Error! Please select account scheme");
+        }
+        
+        
+
+    };
+
 
     window.stressObj = {};
     var resolutionFramework = [];
     var stressType = "";
     /****************Calculations Starts Here*************** */
-    $('#btnCalculate1').click(function(){
+    $('#btnCalculate').click(function(){
+        createAccObject();
         stressObj = {};
         resolutionFramework = [];
         stressType = "";
-        if( $("#accType").val() === "frr"){
+        if( $accType.val() === "frr"){
             var stressPercentage = calculateStress($('#latestInc-1').val().trim(), $('#feb20Inc-1').val().trim());
             var caseType = "";
             if(stressPercentage <= 25){
@@ -206,8 +230,10 @@ $(document).ready(function () {
                 stressType = "Severe Stress";
             }else if(stressPercentage == 100){
                 caseType = "Case-11";
+                resolutionFramework = ["M2","M2R1","M2R2"];
             }else{
                 caseType = "NoCase";
+                resolutionFramework = ["NA"];
             }
             stressObj.stressPercentage = stressPercentage;
             stressObj.acctype = "frr";
