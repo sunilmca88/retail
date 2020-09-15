@@ -36,8 +36,8 @@ $(document).ready(function () {
     var incomeSrc = ["Latest Sal/Rent/GMBR","Sal/Rent/GMBR of Feb 2020"];
     var $accType = $("#accType");
     var $accSchm = $("#accScheme");
-    $accType.change(function () {
-        var $noOfApplicant = $("#noOfApplicant");
+    var $noOfApplicant = $("#noOfApplicant");
+    $accType.change(function () {        
         $noOfApplicant.removeAttr('disabled');
         $noOfApplicant.empty();
         var selectedAccType = $('option:selected', this).val();
@@ -77,7 +77,6 @@ $(document).ready(function () {
                 .attr("value", "1").text("1")).attr('disabled',true);
             /********Updating No of Applicants Options Ends here**************/
             
-
             $('#unsrvcdInt').val("").attr('disabled', true);
             $('#sanctndAmt').val("").attr('disabled', true);
             incomeSrc =  ["Latest Rent", "Rent in Feb 2020"];
@@ -107,9 +106,9 @@ $(document).ready(function () {
         $noOfApplicant.val("1").change();
     });
 
-
-    $("#noOfApplicant").change(function () {
-        $('#applicants').empty();
+    
+    $noOfApplicant.change(function () {
+        $('#applicants').empty(); // reset borrower/coapplicant div
         for (var i = 1; i <= $('option:selected', this).text(); i++) {
             var borrowerElem = '<div class="jumbotron"><div ><h5 class="alert alert-dark text-center" role="alert">Applicant #'+ i + 
             ' Details</h5></div><div class="row"><div class="col-sm-3"><label for="borrowerType-'+ i + '">Borrower Type</label>\
@@ -221,7 +220,7 @@ $(document).ready(function () {
         }else{
             accObj.accNo = accNo;
         }
-        accObj.AppNo = $("#noOfApplicant").val();
+        accObj.AppNo = $noOfApplicant.val();
         accObj.sanctndAmt = sanctndAmt.val().trim();
         accObj.sanctLTV = sanctLTV.val().trim();;
         accObj.schmLTV = schmLTV.val().trim();;
@@ -245,8 +244,38 @@ $(document).ready(function () {
         LTVObj.case5 = ((sanctndAmt.val().trim()+estIntMoratorium.val().trim()+unsrvcdInt.val().trim())/valOfSecurity.val().trim()).toFixed(2);
         console.log("LTV Object : "+ JSON.stringify(LTVObj));
     }
+    // var salariedLatestInc = 0,
+    //     salariedFeb20Inc = 0,
+    //     otherLatestInc = 0,
+    //     otherFeb20Inc = 0;
+    window.salStressPercentageConsolidated;
+    window.othStressPercentageConsolidated;
+    function calculateConsolidatedIncome(){
+        salStressPercentageConsolidated = 0;
+        othStressPercentageConsolidated = 0;
+        var salariedLatestInc = 0,
+            salariedFeb20Inc = 0,
+            otherLatestInc = 0,
+            otherFeb20Inc = 0,
+            noOfApplicant = $noOfApplicant.val();
 
-
+        for(i=1; i<=noOfApplicant; i++){
+            if($('#borrowerType-'+i).val() === "sal"){
+                salariedLatestInc += $('#latestInc-'+i).val().trim();
+                console.log("i:------> "+salariedLatestInc);
+                salariedFeb20Inc += $('#feb20Inc-'+i).val().trim();
+                console.log("i:------> "+salariedFeb20Inc);
+            }
+            if($('#borrowerType-'+i).val() === "oth"){
+                otherLatestInc += $('#latestInc-'+i).val().trim();
+                otherFeb20Inc += $('#feb20Inc-'+i).val().trim();
+            }
+        }
+        salStressPercentageConsolidated = calculateStress(salariedLatestInc, salariedFeb20Inc);
+        othStressPercentageConsolidated = calculateStress(otherLatestInc, otherFeb20Inc);
+        console.log("salStressPercentageConsolidated: "+salStressPercentageConsolidated);
+        console.log("othStressPercentageConsolidated: "+ othStressPercentageConsolidated);
+    }
     window.stressObj = {};
     var resolutionFramework = [];
     var stressType = "";
@@ -254,6 +283,7 @@ $(document).ready(function () {
     $('#btnCalculate').click(function(){
         createAccObject(); //To Create Account level object
         calculateLTV(); //To Calculate LTV for all scenario
+        calculateConsolidatedIncome();
         stressObj = {};
         resolutionFramework = [];
         stressType = "";
@@ -296,6 +326,7 @@ $(document).ready(function () {
 
             //console.log("JSON Parse : "+JSON.parse(stressObj));
         }else{
+            
             console.log("None");
         }
     });
