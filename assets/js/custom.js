@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="tooltip"]').tooltip(); //Initializing  tooltip
 
     var loanOptions = {
         "Select":"",
@@ -176,10 +176,18 @@ $(document).ready(function () {
             }
         });
     });
-    var calculateStress = function(latestInc, feb20Inc){
+    function calculateStress(latestInc, feb20Inc){
         console.log(latestInc +"\n"+ feb20Inc);
         console.log(feb20Inc-latestInc);
-        return (((feb20Inc-latestInc)/feb20Inc)*100).toFixed(2);
+        console.log(feb20Inc-latestInc > 0);
+        if(feb20Inc-latestInc >= 0){
+            console.log("Calculated Stress: "+ parseFloat((((feb20Inc-latestInc)/feb20Inc)*100).toFixed(2)));
+            return parseFloat((((feb20Inc-latestInc)/feb20Inc)*100).toFixed(2));
+        }else{
+            alert("Wrong data");
+            return 0;
+        }
+       
 
     };
 
@@ -224,13 +232,13 @@ $(document).ready(function () {
         }
         accObj.AppNo = $noOfApplicant.val();
         accObj.sanctndAmt = sanctndAmt.val().trim();
-        accObj.sanctLTV = sanctLTV.val().trim();;
-        accObj.schmLTV = schmLTV.val().trim();;
-        accObj.prsntOutstdng = prsntOutstdng.val().trim();;
-        accObj.valOfSecurity = valOfSecurity.val().trim();;
+        accObj.sanctLTV = sanctLTV.val().trim();
+        accObj.schmLTV = schmLTV.val().trim();
+        accObj.prsntOutstdng = prsntOutstdng.val().trim();
+        accObj.valOfSecurity = valOfSecurity.val().trim();
         accObj.proposedROI = proposedROI.val().trim();
-        accObj.unsrvcdInt = unsrvcdInt.val().trim();;
-        accObj.estIntMoratorium = estIntMoratorium.val().trim();;
+        accObj.unsrvcdInt = unsrvcdInt.val().trim();
+        accObj.estIntMoratorium = estIntMoratorium.val().trim();
         accObj.blncLoanTenure = blncLoanTenure.val().trim();
         accObj.blncPeriodRetirement = blncPeriodRetirement.val().trim();
         console.log("Account Level Object : "+ JSON.stringify(accObj));
@@ -239,11 +247,11 @@ $(document).ready(function () {
     /*******Account level object creation ends here********/
     window.LTVObj = {};
     function calculateLTV(){
-        LTVObj.case1 = (prsntOutstdng.val().trim()/valOfSecurity.val().trim()).toFixed(2);
-        LTVObj.case2 = ((sanctndAmt.val().trim()+unsrvcdInt.val().trim())/valOfSecurity.val().trim()).toFixed(2);
-        LTVObj.case3 = ((prsntOutstdng.val().trim()+estIntMoratorium.val().trim())/valOfSecurity.val().trim()).toFixed(2);
-        LTVObj.case4 = ((sanctndAmt.val().trim()+estIntMoratorium.val().trim())/valOfSecurity.val().trim()).toFixed(2);
-        LTVObj.case5 = ((sanctndAmt.val().trim()+estIntMoratorium.val().trim()+unsrvcdInt.val().trim())/valOfSecurity.val().trim()).toFixed(2);
+        LTVObj.case1 = parseFloat((prsntOutstdng.val().trim()/valOfSecurity.val().trim()).toFixed(2));
+        LTVObj.case2 = parseFloat(((sanctndAmt.val().trim()+unsrvcdInt.val().trim())/valOfSecurity.val().trim()).toFixed(2));
+        LTVObj.case3 = parseFloat(((prsntOutstdng.val().trim()+estIntMoratorium.val().trim())/valOfSecurity.val().trim()).toFixed(2));
+        LTVObj.case4 = parseFloat(((sanctndAmt.val().trim()+estIntMoratorium.val().trim())/valOfSecurity.val().trim()).toFixed(2));
+        LTVObj.case5 = parseFloat(((sanctndAmt.val().trim()+estIntMoratorium.val().trim()+unsrvcdInt.val().trim())/valOfSecurity.val().trim()).toFixed(2));
         console.log("LTV Object : "+ JSON.stringify(LTVObj));
     }
     // var salariedLatestInc = 0,
@@ -263,18 +271,19 @@ $(document).ready(function () {
 
         for(i=1; i<=noOfApplicant; i++){
             if($('#borrowerType-'+i).val() === "sal"){
-                salariedLatestInc += $('#latestInc-'+i).val().trim();
+                console.log("Latest Salary : "+ $('#latestInc-'+i).val().trim());
+                salariedLatestInc += parseFloat($('#latestInc-'+i).val().trim());
                 console.log("i:------> "+salariedLatestInc);
-                salariedFeb20Inc += $('#feb20Inc-'+i).val().trim();
+                salariedFeb20Inc += parseFloat($('#feb20Inc-'+i).val().trim());
                 console.log("i:------> "+salariedFeb20Inc);
             }
             if($('#borrowerType-'+i).val() === "oth"){
-                otherLatestInc += $('#latestInc-'+i).val().trim();
-                otherFeb20Inc += $('#feb20Inc-'+i).val().trim();
+                otherLatestInc += parseFloat($('#latestInc-'+i).val().trim());
+                otherFeb20Inc += parseFloat($('#feb20Inc-'+i).val().trim());
             }
         }
-        salStressPercentageConsolidated = calculateStress(salariedLatestInc, salariedFeb20Inc);
-        othStressPercentageConsolidated = calculateStress(otherLatestInc, otherFeb20Inc);
+        salStressPercentageConsolidated = calculateStress(salariedLatestInc, salariedFeb20Inc) || 0;
+        othStressPercentageConsolidated = calculateStress(otherLatestInc, otherFeb20Inc) || 0;
         console.log("salStressPercentageConsolidated: "+salStressPercentageConsolidated);
         console.log("othStressPercentageConsolidated: "+ othStressPercentageConsolidated);
     }
@@ -293,6 +302,10 @@ $(document).ready(function () {
             var stressPercentage = calculateStress($('#latestInc-1').val().trim(), $('#feb20Inc-1').val().trim());
             var caseType = "";
             var LTV = [];
+            var maxOfSchmSnctdLTV = parseFloat(Math.max(sanctLTV.val().trim(), schmLTV.val().trim())).toFixed(2);
+            var maxOfBlncTenureRetirementAge = parseInt(Math.max(blncLoanTenure.val().trim(), blncPeriodRetirement.val().trim()), 10);
+            console.log("maxOfSchmSnctdLTV : "+maxOfSchmSnctdLTV);
+            console.log("maxOfBlncTenureRetirementAge : "+maxOfBlncTenureRetirementAge);
             if(stressPercentage <= 25){
                 caseType = "Case-4";
                 resolutionFramework = ["NA"];
@@ -300,13 +313,24 @@ $(document).ready(function () {
             }else if(stressPercentage > 25 && stressPercentage <= 40){
                 caseType = "Case-5";
                 resolutionFramework = ["R1","R2"];
-                LTV[0] = LTVObj.case1;
+                if(LTVObj.case1 <= maxOfSchmSnctdLTV)
+                    LTV[0] = LTVObj.case1;
+                // else
+                //     LTV[0] = 0;
                 stressType = "Mild Stress";
             }else if(stressPercentage > 40 && stressPercentage < 100){
                 caseType = "Case-6";
                 resolutionFramework = ["R1","R2","M1","M2","M1R1","M1R2","M2R1","M2R2"];
-                LTV[0] = LTVObj.case1;
-                LTV[1] = LTVObj.case3;
+                if(LTVObj.case1 <= maxOfSchmSnctdLTV)
+                    LTV[0] = LTVObj.case1;
+                // else
+                //     LTV[0] = 0;
+
+                if(LTVObj.case3 <= maxOfSchmSnctdLTV)
+                    LTV[1] = LTVObj.case3;
+                // else
+                //     LTV[1] = 0;
+                
                 stressType = "Severe Stress";
             }else if(stressPercentage == 100){
                 caseType = "Case-11";
