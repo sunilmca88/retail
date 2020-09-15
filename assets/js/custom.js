@@ -72,15 +72,15 @@ $(document).ready(function () {
                   '"  placeholder="Enter Value"></div><div class="col-sm-3"><label id="lblIncomeFeb20-'+i+'" for="feb20Inc-'+ i + 
                   '">'+incomeSrc[1]+'</label><input type="tel" class="form-control" id="feb20Inc-'+ i + 
                   '" placeholder="Enter Value"></div><div class="col-sm-3"><label for="totalDeduction-'+ i + 
-                  '">Total Deduction</label><input type="tel" class="form-control" id="totalDeduction-'+ i + 
+                  '">Total Deduction(Monthly)</label><input type="tel" class="form-control" id="totalDeduction-'+ i + 
                   '" placeholder="Enter Value" '+isFRR+'></div></div><br/>\
-                  <div class="row"><div class="col-sm-4"><label for="foir-'+i+
+                  <div class="row"><div class="col-sm-4"><label id="lblfoir-'+i+'" for="foir-'+i+
                   '" data-toggle="tooltip" title="FOIR applicable as per present scheme guidelines in consonance with income level">\
                       FOIR <sup><span class="badge badge-warning">i</span></sup></label>\
                     <input type="tel" class="form-control" id="foir-'+i+'" placeholder="Enter Value"'+isFRR+'>\
                   </div><div class="col-sm-4"><label for="1920Profit-'+i+'">100% Net Profit of 2019-20 </label>\
                     <input type="tel" class="form-control" id="1920Profit-'+i+'" placeholder="Enter Value"'+isFRR+'>\
-                  </div><div class="col-sm-4"><label for="1819Profit-'+i+'" data-toggle="tooltip" title="If net profit of FY 2019-20 not available">\
+                  </div><div class="col-sm-4"><label id="lbl1819Profit-'+i+'" for="1819Profit-'+i+'" data-toggle="tooltip" title="If net profit of FY 2019-20 not available">\
                       100% Net Profit of FY 2018-19 <sup><span class="badge badge-warning">i</span></sup></label>\
                     <input type="tel" class="form-control" id="1819Profit-'+i+'" placeholder="Enter Value"'+isFRR+'></div></div><br/>\
                   <div class="row"><div class="col-sm-8"><label for="borrowerName-'+ i + '">Customer Name</label><input type="text" class="form-control" id="borrowerName-'+ i + 
@@ -88,6 +88,8 @@ $(document).ready(function () {
                     <h3 class="badge badge-danger" style="font-size: x-large;" id="borrowerImpact-'+ i + 
                 '"></h3></div></div></div>';
             $('#applicants').append(borrowerElem);
+            $('#lblfoir-'+i).tooltip();
+            $('#lbl1819Profit-'+i).tooltip();
         }
 
 
