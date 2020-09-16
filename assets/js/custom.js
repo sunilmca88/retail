@@ -1,6 +1,23 @@
 $(document).ready(function () {
 
-    $('[data-toggle="tooltip"]').tooltip(); //Initializing  tooltip
+    /******Variable Initialisation starts here******/
+    window.accObj = {};
+    window.LTVObj = {};
+    window.stressObj = {};
+    window.salStressPercentageConsolidated = 0;
+    window.othStressPercentageConsolidated = 0;
+    var resolutionFramework = [];
+    var stressType = "";
+    var sanctndAmt =  $('#sanctndAmt'),
+        sanctLTV = $('#sanctLTV'),
+        schmLTV = $('#schmLTV'),
+        prsntOutstdng = $('#prsntOutstdng'),
+        valOfSecurity = $('#valOfSecurity'),
+        proposedROI = $('#proposedROI'),
+        unsrvcdInt = $('#unsrvcdInt'),
+        estIntMoratorium = $('#estIntMoratorium'),
+        blncLoanTenure = $('#blncLoanTenure'),
+        blncPeriodRetirement = $('#blncPeriodRetirement');
 
     var loanOptions = {
         "Select":"",
@@ -37,6 +54,12 @@ $(document).ready(function () {
     var $accType = $("#accType");
     var $accSchm = $("#accScheme");
     var $noOfApplicant = $("#noOfApplicant");
+    /******Variable Initialisation ends here******/
+
+    /******Default function Initialisation starts here******/
+    $('[data-toggle="tooltip"]').tooltip(); //Initializing  tooltip
+    /******Default function Initialisation ends here******/
+
     $accType.change(function () {        
         $noOfApplicant.removeAttr('disabled');
         $noOfApplicant.empty();
@@ -192,21 +215,7 @@ $(document).ready(function () {
     };
 
     /*******Account level object creation starts here********/
-    window.accObj = {};
-
-    var sanctndAmt =  $('#sanctndAmt'),
-        sanctLTV = $('#sanctLTV'),
-        schmLTV = $('#schmLTV'),
-        prsntOutstdng = $('#prsntOutstdng'),
-        valOfSecurity = $('#valOfSecurity'),
-        proposedROI = $('#proposedROI'),
-        unsrvcdInt = $('#unsrvcdInt'),
-        estIntMoratorium = $('#estIntMoratorium'),
-        blncLoanTenure = $('#blncLoanTenure'),
-        blncPeriodRetirement = $('#blncPeriodRetirement');
-
-
-
+    
     function createAccObject(){
         accObj = {};
         console.log("Inside Create Acc Object Function : "+$accType.val());
@@ -245,7 +254,7 @@ $(document).ready(function () {
 
     };
     /*******Account level object creation ends here********/
-    window.LTVObj = {};
+    
     function calculateLTV(){
         LTVObj.case1 = parseFloat((prsntOutstdng.val().trim()/valOfSecurity.val().trim()).toFixed(2));
         LTVObj.case2 = parseFloat(((sanctndAmt.val().trim()+unsrvcdInt.val().trim())/valOfSecurity.val().trim()).toFixed(2));
@@ -258,8 +267,7 @@ $(document).ready(function () {
     //     salariedFeb20Inc = 0,
     //     otherLatestInc = 0,
     //     otherFeb20Inc = 0;
-    window.salStressPercentageConsolidated;
-    window.othStressPercentageConsolidated;
+   
     function calculateConsolidatedIncome(){
         salStressPercentageConsolidated = 0;
         othStressPercentageConsolidated = 0;
@@ -287,9 +295,7 @@ $(document).ready(function () {
         console.log("salStressPercentageConsolidated: "+salStressPercentageConsolidated);
         console.log("othStressPercentageConsolidated: "+ othStressPercentageConsolidated);
     }
-    window.stressObj = {};
-    var resolutionFramework = [];
-    var stressType = "";
+    
     /****************Calculations Starts Here*************** */
     $('#btnCalculate').click(function(){
         createAccObject(); //To Create Account level object
