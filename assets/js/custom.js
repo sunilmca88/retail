@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     /******Variable Initialisation starts here******/
     window.accObj = {};
-    window.LTVObj = {};
+    var LTVObj = {};
     window.stressObj = {};
     window.salStressPercentageConsolidated = 0;
     window.othStressPercentageConsolidated = 0;
@@ -256,6 +256,7 @@ $(document).ready(function () {
     /*******Account level object creation ends here********/
     
     function calculateLTV(){
+        LTVObj = {};
         LTVObj.case1 = parseFloat((prsntOutstdng.val().trim()/valOfSecurity.val().trim()).toFixed(2));
         LTVObj.case2 = parseFloat(((sanctndAmt.val().trim()+unsrvcdInt.val().trim())/valOfSecurity.val().trim()).toFixed(2));
         LTVObj.case3 = parseFloat(((prsntOutstdng.val().trim()+estIntMoratorium.val().trim())/valOfSecurity.val().trim()).toFixed(2));
@@ -267,8 +268,9 @@ $(document).ready(function () {
     //     salariedFeb20Inc = 0,
     //     otherLatestInc = 0,
     //     otherFeb20Inc = 0;
-    var consolidatedCaseType = "";
+   
     function calculateConsolidatedIncome(){
+        var consolidatedCaseType = "";
         salStressPercentageConsolidated = 0;
         othStressPercentageConsolidated = 0;
         var salariedLatestInc = 0,
@@ -380,19 +382,30 @@ $(document).ready(function () {
             alert("Some error in calculateConsolidatedIncome method");
         }
 
+        stressObj.stressPercentage = {
+                "salStressPercentageConsolidated": salStressPercentageConsolidated,
+                "othStressPercentageConsolidated": othStressPercentageConsolidated
+            }
+        stressObj.acctype = "loan_od";
+        stressObj.case = consolidatedCaseType;
+        stressObj.stressType = stressType;
+        //stressObj.LTV = LTV;
+        stressObj.resolutionFramework = resolutionFramework; 
+        console.log("stressObj for Loan and OD : "+ JSON.stringify(stressObj));
+
         
 
     }
     
     /****************Calculations Starts Here*************** */
     $('#btnCalculate').click(function(){
-        createAccObject(); //To Create Account level object
-        calculateLTV(); //To Calculate LTV for all scenario
-        calculateConsolidatedIncome();
+        var accountType = $accType.val(); 
         stressObj = {};
         resolutionFramework = [];
         stressType = "";
-        if( $accType.val() === "frr"){
+        createAccObject(); //To Create Account level object
+        calculateLTV(); //To Calculate LTV for all scenario
+        if(accountType  === "frr"){
             var stressPercentage = calculateStress($('#latestInc-1').val().trim(), $('#feb20Inc-1').val().trim());
             var caseType = "";
             var LTV = [];
@@ -445,7 +458,12 @@ $(document).ready(function () {
             console.log("stressObj : "+ JSON.stringify(stressObj));
 
             //console.log("JSON Parse : "+JSON.parse(stressObj));
-        }else{
+        }else if(accountType  === "loan"){
+            calculateConsolidatedIncome();
+            stressObj.acctype = "loan";
+        }
+        
+        else{
             
             console.log("None");
         }
