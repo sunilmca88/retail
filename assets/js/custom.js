@@ -7,7 +7,8 @@ $(document).ready(function () {
     window.salStressPercentageConsolidated = 0;
     window.othStressPercentageConsolidated = 0;
     var resolutionFramework = [];
-    var stressType = "";
+    var stressType = "";    
+    var LTV = [];
     var sanctndAmt =  $('#sanctndAmt'),
         sanctLTV = $('#sanctLTV'),
         schmLTV = $('#schmLTV'),
@@ -269,7 +270,7 @@ $(document).ready(function () {
     //     otherLatestInc = 0,
     //     otherFeb20Inc = 0;
    
-    function calculateConsolidatedIncome(){
+    function calculateConsolidatedIncome(accType){
         var consolidatedCaseType = "";
         salStressPercentageConsolidated = 0;
         othStressPercentageConsolidated = 0;
@@ -305,12 +306,27 @@ $(document).ready(function () {
             }
             if(othStressPercentageConsolidated>= 50 && othStressPercentageConsolidated <100){
                 consolidatedCaseType = "case-8";
-                resolutionFramework = ["R1","R2"];
+                if(accType === "loan")
+                    resolutionFramework = ["R1","R2"];
+                if(accType === "od")
+                    resolutionFramework = ["F1"];
+                if(LTVObj.case1 <= maxOfSchmSnctdLTV)
+                    LTV[0] = LTVObj.case1;
+                // else
+                //     LTV[0] = 0;
                 stressType = "Mild Stress";
+                
             }
             if(othStressPercentageConsolidated === 100){
                 consolidatedCaseType = "case-9";
-                resolutionFramework = ["M2","M2R1","M2R2"];
+                if(accType === "loan")
+                    resolutionFramework = ["M2","M2R1","M2R2"];
+                if(accType === "od")
+                    resolutionFramework = ["F2","F1F2"];
+                if(LTVObj.case3 <= maxOfSchmSnctdLTV)
+                    LTV[1] = LTVObj.case3;
+                // else
+                    //     LTV[1] = 0;
                 stressType = "Severe Stress";
             }
 
@@ -326,12 +342,26 @@ $(document).ready(function () {
             }
             if(othStressPercentageConsolidated>= 50 && othStressPercentageConsolidated <100){
                 consolidatedCaseType = "case-8";
-                resolutionFramework = ["R1","R2"];
+                if(accType === "loan")
+                    resolutionFramework = ["R1","R2"];
+                if(accType === "od")
+                    resolutionFramework = ["F1"];
+                if(LTVObj.case1 <= maxOfSchmSnctdLTV)
+                    LTV[0] = LTVObj.case1;
+                // else
+                //     LTV[0] = 0;
                 stressType = "Mild Stress";
             }
             if(othStressPercentageConsolidated === 100){
                 consolidatedCaseType = "case-9";
-                resolutionFramework = ["M2","M2R1","M2R2"];
+                if(accType === "loan")
+                    resolutionFramework = ["M2","M2R1","M2R2"];
+                if(accType === "od")
+                    resolutionFramework = ["F2","F1F2"];
+                if(LTVObj.case3 <= maxOfSchmSnctdLTV)
+                    LTV[1] = LTVObj.case3;
+                // else
+                    //     LTV[1] = 0;  
                 stressType = "Severe Stress";
             }
          
@@ -339,17 +369,38 @@ $(document).ready(function () {
 
             if(othStressPercentageConsolidated < 50 || othStressPercentageConsolidated === 0){
                 consolidatedCaseType = "case-2";
-                resolutionFramework = ["R1","R2"];
+                if(accType === "loan")
+                    resolutionFramework = ["R1","R2"];
+                if(accType === "od")
+                    resolutionFramework = ["F1"];
+                if(LTVObj.case1 <= maxOfSchmSnctdLTV)
+                    LTV[0] = LTVObj.case1;
+                // else
+                //     LTV[0] = 0;
                 stressType = "Mild Stress";
             }
             if(othStressPercentageConsolidated>= 50 && othStressPercentageConsolidated <100){
                 consolidatedCaseType = "case-2_8";
-                resolutionFramework = ["R1","R2"];
+                if(accType === "loan")
+                    resolutionFramework = ["R1","R2"];
+                if(accType === "od")
+                    resolutionFramework = ["F1"];
+                if(LTVObj.case1 <= maxOfSchmSnctdLTV)
+                    LTV[0] = LTVObj.case1;
+                // else
+                //     LTV[0] = 0;
                 stressType = "Mild Stress";
             }
             if(othStressPercentageConsolidated === 100){
                 consolidatedCaseType = "case-9";
-                resolutionFramework = ["M2","M2R1","M2R2"];
+                if(accType === "loan")
+                    resolutionFramework = ["M2","M2R1","M2R2"];
+                if(accType === "od")
+                    resolutionFramework = ["F2","F1F2"];
+                if(LTVObj.case3 <= maxOfSchmSnctdLTV)
+                    LTV[1] = LTVObj.case3;
+                // else
+                    //     LTV[1] = 0; 
                 stressType = "Severe Stress";
             }
         }else if(salStressPercentageConsolidated > 40 && salStressPercentageConsolidated < 100){
@@ -358,23 +409,55 @@ $(document).ready(function () {
                 othStressPercentageConsolidated === 0 ||
                 (othStressPercentageConsolidated>= 50 && othStressPercentageConsolidated <100)){
                     consolidatedCaseType = "case-3";
-                    resolutionFramework = ["R1","R2","M1","M2","M1R1","M1R2","M2R1","M2R2"];
+                    if(accType === "loan")
+                        resolutionFramework = ["R1","R2","M1","M2","M1R1","M1R2","M2R1","M2R2"];
+                    if(accType === "od")
+                        resolutionFramework = ["F1","F2","F1F2"];  
+                    if(LTVObj.case1 <= maxOfSchmSnctdLTV)
+                        LTV[0] = LTVObj.case1;
+                    // else
+                    //     LTV[0] = 0;
+                    if(LTVObj.case3 <= maxOfSchmSnctdLTV)
+                        LTV[1] = LTVObj.case3;
+                    // else
+                    //     LTV[1] = 0;           
                     stressType = "Severe Stress";
             }
             if(othStressPercentageConsolidated === 100){
                 consolidatedCaseType = "case-9";
-                resolutionFramework = ["M2","M2R1","M2R2"];
+                if(accType === "loan")
+                    resolutionFramework = ["M2","M2R1","M2R2"];
+                if(accType === "od")
+                    resolutionFramework = ["F2","F1F2"];
+                if(LTVObj.case3 <= maxOfSchmSnctdLTV)
+                    LTV[1] = LTVObj.case3;
+                // else
+                    //     LTV[1] = 0;    
                 stressType = "Severe Stress";
             }
         }else if(salStressPercentageConsolidated === 100){
             if(othStressPercentageConsolidated === 0){
                 consolidatedCaseType = "case-10";
-                resolutionFramework = ["M2","M2R1","M2R2"];
+                if(accType === "loan")
+                    resolutionFramework = ["M2","M2R1","M2R2"];
+                if(accType === "od")
+                    resolutionFramework = ["F2","F1F2"];
+                if(LTVObj.case3 <= maxOfSchmSnctdLTV)
+                    LTV[1] = LTVObj.case3;
+                // else
+                    //     LTV[1] = 0;    
                 stressType = "Severe Stress";
             }
             if(othStressPercentageConsolidated === 100){
                 consolidatedCaseType = "case-9_10";
-                resolutionFramework = ["M2","M2R1","M2R2"];
+                if(accType === "loan")
+                    resolutionFramework = ["M2","M2R1","M2R2"];
+                if(accType === "od")
+                    resolutionFramework = ["F2","F1F2"];
+                if(LTVObj.case3 <= maxOfSchmSnctdLTV)
+                    LTV[1] = LTVObj.case3;
+                // else
+                    //     LTV[1] = 0;    
                 stressType = "Severe Stress";
             }
 
@@ -386,11 +469,12 @@ $(document).ready(function () {
                 "salStressPercentageConsolidated": salStressPercentageConsolidated,
                 "othStressPercentageConsolidated": othStressPercentageConsolidated
             }
-        stressObj.acctype = "loan_od";
+        //stressObj.acctype = "loan_od";
         stressObj.case = consolidatedCaseType;
         stressObj.stressType = stressType;
-        //stressObj.LTV = LTV;
+        stressObj.LTV = LTV;
         stressObj.resolutionFramework = resolutionFramework; 
+        stressObj.acctype = accType;
         console.log("stressObj for Loan and OD : "+ JSON.stringify(stressObj));
 
         
@@ -400,72 +484,77 @@ $(document).ready(function () {
     /****************Calculations Starts Here*************** */
     $('#btnCalculate').click(function(){
         var accountType = $accType.val(); 
-        stressObj = {};
-        resolutionFramework = [];
-        stressType = "";
+        stressObj = {}; //resetting global variable
+        resolutionFramework = []; //resetting global variable
+        stressType = ""; //resetting global variable
+        LTV = [];
         createAccObject(); //To Create Account level object
         calculateLTV(); //To Calculate LTV for all scenario
+
+        var maxOfSchmSnctdLTV = parseFloat(Math.max(sanctLTV.val().trim(), schmLTV.val().trim())).toFixed(2);
+        var maxOfBlncTenureRetirementAge = parseInt(Math.max(blncLoanTenure.val().trim(), blncPeriodRetirement.val().trim()), 10);
+            
         if(accountType  === "frr"){
-            var stressPercentage = calculateStress($('#latestInc-1').val().trim(), $('#feb20Inc-1').val().trim());
-            var caseType = "";
-            var LTV = [];
-            var maxOfSchmSnctdLTV = parseFloat(Math.max(sanctLTV.val().trim(), schmLTV.val().trim())).toFixed(2);
-            var maxOfBlncTenureRetirementAge = parseInt(Math.max(blncLoanTenure.val().trim(), blncPeriodRetirement.val().trim()), 10);
+            var stressPercentageFRR = calculateStress($('#latestInc-1').val().trim(), $('#feb20Inc-1').val().trim()) || 0;
+            //var caseType = "";
             console.log("maxOfSchmSnctdLTV : "+maxOfSchmSnctdLTV);
             console.log("maxOfBlncTenureRetirementAge : "+maxOfBlncTenureRetirementAge);
-            if(stressPercentage <= 25){
-                caseType = "case-4";
-                resolutionFramework = ["NA"];
-                stressType = "Minimum Stress";
-            }else if(stressPercentage > 25 && stressPercentage <= 40){
-                caseType = "case-5";
-                resolutionFramework = ["R1","R2"];
+            if(stressPercentageFRR <= 25 || stressPercentageFRR === 0){
+                stressObj.case = "case-4";
+                stressObj.resolutionFramework = ["NA"];
+                stressObj.stressType = "Minimum Stress";
+            }else if(stressPercentageFRR > 25 && stressPercentageFRR <= 40){
+                stressObj.case = "case-5";
+                stressObj.resolutionFramework = ["R1","R2"];
                 if(LTVObj.case1 <= maxOfSchmSnctdLTV)
                     LTV[0] = LTVObj.case1;
                 // else
                 //     LTV[0] = 0;
-                stressType = "Mild Stress";
-            }else if(stressPercentage > 40 && stressPercentage < 100){
-                caseType = "case-6";
-                resolutionFramework = ["R1","R2","M1","M2","M1R1","M1R2","M2R1","M2R2"];
+                stressObj.stressType = "Mild Stress";
+            }else if(stressPercentageFRR > 40 && stressPercentageFRR < 100){
+                stressObj.case = "case-6";
+                stressObj.resolutionFramework = ["R1","R2","M1","M2","M1R1","M1R2","M2R1","M2R2"];
                 if(LTVObj.case1 <= maxOfSchmSnctdLTV)
                     LTV[0] = LTVObj.case1;
                 // else
                 //     LTV[0] = 0;
-
                 if(LTVObj.case3 <= maxOfSchmSnctdLTV)
                     LTV[1] = LTVObj.case3;
                 // else
-                //     LTV[1] = 0;
-                
-                stressType = "Severe Stress";
-            }else if(stressPercentage == 100){
-                caseType = "case-11";
-                resolutionFramework = ["M2","M2R1","M2R2"];
-                LTV[0] = LTVObj.case3;
+                //     LTV[1] = 0;                
+                stressObj.stressType = "Severe Stress";
+            }else if(stressPercentageFRR == 100){
+                stressObj.case = "case-11";
+                stressObj.resolutionFramework = ["M2","M2R1","M2R2"];
+                if(LTVObj.case3 <= maxOfSchmSnctdLTV)
+                    LTV[1] = LTVObj.case3;
+                // else
+                    //     LTV[1] = 0;           
                 stressType = "Severe Stress";
             }else{
-                caseType = "nocase";
-                resolutionFramework = ["NA"];
+                stressObj.case = "nocase";
+                stressObj.stressType.resolutionFramework = ["NA"];
             }
             console.log(LTV);
-            stressObj.stressPercentage = stressPercentage;
-            stressObj.acctype = "frr";
-            stressObj.case = caseType;
-            stressObj.stressType = stressType;
+            stressObj.stressPercentage = stressPercentageFRR;
+            stressObj.acctype = "frr";            
             stressObj.LTV = LTV;
-            stressObj.resolutionFramework = resolutionFramework; 
+           // stressObj.case = caseType;
+           // stressObj.stressType = stressType;
+           // stressObj.resolutionFramework = resolutionFramework; 
             console.log("stressObj : "+ JSON.stringify(stressObj));
 
             //console.log("JSON Parse : "+JSON.parse(stressObj));
         }else if(accountType  === "loan"){
-            calculateConsolidatedIncome();
-            stressObj.acctype = "loan";
+            calculateConsolidatedIncome("loan");
+           
+        }else if(accountType  === "od"){
+            calculateConsolidatedIncome(od);
         }
         
         else{
             
-            console.log("None");
+            console.log("Account Type None");
         }
     });
     
