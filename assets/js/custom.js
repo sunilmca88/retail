@@ -267,7 +267,7 @@ $(document).ready(function () {
     //     salariedFeb20Inc = 0,
     //     otherLatestInc = 0,
     //     otherFeb20Inc = 0;
-   
+    var consolidatedCaseType = "";
     function calculateConsolidatedIncome(){
         salStressPercentageConsolidated = 0;
         othStressPercentageConsolidated = 0;
@@ -294,6 +294,94 @@ $(document).ready(function () {
         othStressPercentageConsolidated = calculateStress(otherLatestInc, otherFeb20Inc) || 0;
         console.log("salStressPercentageConsolidated: "+salStressPercentageConsolidated);
         console.log("othStressPercentageConsolidated: "+ othStressPercentageConsolidated);
+
+        if(salStressPercentageConsolidated === 0){
+            if(othStressPercentageConsolidated < 50 && othStressPercentageConsolidated > 0){
+                consolidatedCaseType = "case-7";
+                resolutionFramework = ["NA"];
+                stressType = "Minimum Stress";
+            }
+            if(othStressPercentageConsolidated>= 50 && othStressPercentageConsolidated <100){
+                consolidatedCaseType = "case-8";
+                resolutionFramework = ["R1","R2"];
+                stressType = "Mild Stress";
+            }
+            if(othStressPercentageConsolidated === 100){
+                consolidatedCaseType = "case-9";
+                resolutionFramework = ["M2","M2R1","M2R2"];
+                stressType = "Severe Stress";
+            }
+
+        }else if(salStressPercentageConsolidated <= 25 && salStressPercentageConsolidated > 0){
+            if(othStressPercentageConsolidated === 0){
+                consolidatedCaseType = "case-1";
+                resolutionFramework = ["NA"];
+                stressType = "Minimum Stress";
+            }else if(othStressPercentageConsolidated < 50 && othStressPercentageConsolidated > 0){
+                consolidatedCaseType = "case-1_7";
+                resolutionFramework = ["NA"];
+                stressType = "Minimum Stress";
+            }
+            if(othStressPercentageConsolidated>= 50 && othStressPercentageConsolidated <100){
+                consolidatedCaseType = "case-8";
+                resolutionFramework = ["R1","R2"];
+                stressType = "Mild Stress";
+            }
+            if(othStressPercentageConsolidated === 100){
+                consolidatedCaseType = "case-9";
+                resolutionFramework = ["M2","M2R1","M2R2"];
+                stressType = "Severe Stress";
+            }
+         
+        }else if(salStressPercentageConsolidated > 25 && salStressPercentageConsolidated <= 40){
+
+            if(othStressPercentageConsolidated < 50 || othStressPercentageConsolidated === 0){
+                consolidatedCaseType = "case-2";
+                resolutionFramework = ["R1","R2"];
+                stressType = "Mild Stress";
+            }
+            if(othStressPercentageConsolidated>= 50 && othStressPercentageConsolidated <100){
+                consolidatedCaseType = "case-2_8";
+                resolutionFramework = ["R1","R2"];
+                stressType = "Mild Stress";
+            }
+            if(othStressPercentageConsolidated === 100){
+                consolidatedCaseType = "case-9";
+                resolutionFramework = ["M2","M2R1","M2R2"];
+                stressType = "Severe Stress";
+            }
+        }else if(salStressPercentageConsolidated > 40 && salStressPercentageConsolidated < 100){
+            
+            if(othStressPercentageConsolidated < 50  || 
+                othStressPercentageConsolidated === 0 ||
+                (othStressPercentageConsolidated>= 50 && othStressPercentageConsolidated <100)){
+                    consolidatedCaseType = "case-3";
+                    resolutionFramework = ["R1","R2","M1","M2","M1R1","M1R2","M2R1","M2R2"];
+                    stressType = "Severe Stress";
+            }
+            if(othStressPercentageConsolidated === 100){
+                consolidatedCaseType = "case-9";
+                resolutionFramework = ["M2","M2R1","M2R2"];
+                stressType = "Severe Stress";
+            }
+        }else if(salStressPercentageConsolidated === 100){
+            if(othStressPercentageConsolidated === 0){
+                consolidatedCaseType = "case-10";
+                resolutionFramework = ["M2","M2R1","M2R2"];
+                stressType = "Severe Stress";
+            }
+            if(othStressPercentageConsolidated === 100){
+                consolidatedCaseType = "case-9_10";
+                resolutionFramework = ["M2","M2R1","M2R2"];
+                stressType = "Severe Stress";
+            }
+
+        }else{
+            alert("Some error in calculateConsolidatedIncome method");
+        }
+
+        
+
     }
     
     /****************Calculations Starts Here*************** */
@@ -313,11 +401,11 @@ $(document).ready(function () {
             console.log("maxOfSchmSnctdLTV : "+maxOfSchmSnctdLTV);
             console.log("maxOfBlncTenureRetirementAge : "+maxOfBlncTenureRetirementAge);
             if(stressPercentage <= 25){
-                caseType = "Case-4";
+                caseType = "case-4";
                 resolutionFramework = ["NA"];
                 stressType = "Minimum Stress";
             }else if(stressPercentage > 25 && stressPercentage <= 40){
-                caseType = "Case-5";
+                caseType = "case-5";
                 resolutionFramework = ["R1","R2"];
                 if(LTVObj.case1 <= maxOfSchmSnctdLTV)
                     LTV[0] = LTVObj.case1;
@@ -325,7 +413,7 @@ $(document).ready(function () {
                 //     LTV[0] = 0;
                 stressType = "Mild Stress";
             }else if(stressPercentage > 40 && stressPercentage < 100){
-                caseType = "Case-6";
+                caseType = "case-6";
                 resolutionFramework = ["R1","R2","M1","M2","M1R1","M1R2","M2R1","M2R2"];
                 if(LTVObj.case1 <= maxOfSchmSnctdLTV)
                     LTV[0] = LTVObj.case1;
@@ -339,12 +427,12 @@ $(document).ready(function () {
                 
                 stressType = "Severe Stress";
             }else if(stressPercentage == 100){
-                caseType = "Case-11";
+                caseType = "case-11";
                 resolutionFramework = ["M2","M2R1","M2R2"];
                 LTV[0] = LTVObj.case3;
                 stressType = "Severe Stress";
             }else{
-                caseType = "NoCase";
+                caseType = "nocase";
                 resolutionFramework = ["NA"];
             }
             console.log(LTV);
