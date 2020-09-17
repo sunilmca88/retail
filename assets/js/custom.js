@@ -3,9 +3,12 @@ $(document).ready(function () {
     /******Variable Initialisation starts here******/
     window.accObj = {};
     var LTVObj = {};
+    var resRepPeriodObj = {};
     window.stressObj = {};
     window.salStressPercentageConsolidated = 0;
     window.othStressPercentageConsolidated = 0;
+    var maxOfSchmSnctdLTV = 0;
+   // var maxOfBlncTenureRetirementAge = 0;
     var resolutionFramework = [];
     var stressType = "";    
     var LTV = [];
@@ -148,18 +151,19 @@ $(document).ready(function () {
                   '" data-toggle="tooltip" title="FOIR applicable as per present scheme guidelines in consonance with income level">\
                       FOIR <sup><span class="badge badge-warning">i</span></sup></label>\
                     <input type="tel" class="form-control" id="foir-'+i+'" placeholder="Enter Value"'+isFRR+'>\
-                  </div><div class="col-sm-4"><label for="1920Profit-'+i+'">100% Net Profit of 2019-20 </label>\
-                    <input type="tel" class="form-control" id="1920Profit-'+i+'" placeholder="Enter Value"'+isFRR+'>\
-                  </div><div class="col-sm-4"><label id="lbl1819Profit-'+i+'" for="1819Profit-'+i+'" data-toggle="tooltip" title="If net profit of FY 2019-20 not available">\
-                      100% Net Profit of FY 2018-19 <sup><span class="badge badge-warning">i</span></sup></label>\
-                    <input type="tel" class="form-control" id="1819Profit-'+i+'" placeholder="Enter Value"'+isFRR+'></div></div><br/>\
+                  </div><div class="col-sm-4"><label for="netProfitYr-'+i+'">Net Profit Year</label><select id="netProfitYr-'+i+
+                  '" class="form-control" '+isFRR+'><option selected value="" disabled>Select</option><option value="yr1920">2019-2020</option>\
+                  <option value="yr1819">2018-2019</option></select></div>\
+                  <div class="col-sm-4"><label for="1920Profit-'+i+'">100% Net Profit <span id="year"></span></label>\
+                    <input type="tel" class="form-control" id="1920Profit-'+i+'" placeholder="Enter Value" '+isFRR+'>\
+                  </div></div><br/>\
                   <div class="row"><div class="col-sm-8"><label for="borrowerName-'+ i + '">Customer Name</label><input type="text" class="form-control" id="borrowerName-'+ i + 
                   '" placeholder="Enter Name"></div><div class="col-sm-4"style="text-align:center;"><label>Percentage Reduction in Salary</label><br/>\
                     <h3 class="badge badge-danger" style="font-size: x-large;" id="borrowerImpact-'+ i + 
                 '"></h3></div></div></div>';
             $('#applicants').append(borrowerElem);
             $('#lblfoir-'+i).tooltip();
-            $('#lbl1819Profit-'+i).tooltip();
+            //$('#lbl1819Profit-'+i).tooltip();
         }
 
 
@@ -172,12 +176,21 @@ $(document).ready(function () {
 
         });
 
+
         $( "input[id^='latestInc']" ).blur(function (){
             var elemIndex = $(this).attr('id').split('-')[1];
             $('#feb20Inc-'+elemIndex).val("");
             $('#borrowerImpact-'+elemIndex).html("");
         });
-
+        
+        $("[id^='netProfitYr']" ).change(function () {
+            var selectedYr = $('option:selected', this).val();
+            if(selectedYr === 'yr1920')
+                $('#year').text('of 2019-2020');
+            else
+                $('#year').text('of 2018-2019');
+            console.log($('option:selected', this).val());
+        });
             
         $("[id^='borrowerType']" ).change(function () {
             var elemIndex = $(this).attr('id').split('-')[1];
@@ -188,12 +201,12 @@ $(document).ready(function () {
                 $('#lblIncomeLatest-'+elemIndex).text("Latest Salary");
                 $('#lblIncomeFeb20-'+elemIndex).text("Salary in Feb 2020");
                 $('#1920Profit-'+elemIndex).val("").attr('disabled', true);
-                $('#1819Profit-'+elemIndex).val("").attr('disabled', true);
+                $('#netProfitYr-'+elemIndex).val("").attr('disabled', true);
             }else  if(selectedBorrowerType === "oth"){
                 $('#lblIncomeLatest-'+elemIndex).text("Latest GMBR");
                 $('#lblIncomeFeb20-'+elemIndex).text("Previous GMBR");
                 $('#1920Profit-'+elemIndex).val("").removeAttr('disabled')
-                $('#1819Profit-'+elemIndex).val("").removeAttr('disabled')
+                $('#netProfitYr-'+elemIndex).val("").removeAttr('disabled')
             }else{
                 $('#lblIncomeLatest-'+elemIndex).text("");
                 $('#lblIncomeFeb20-'+elemIndex).text("");
@@ -481,6 +494,107 @@ $(document).ready(function () {
 
     }
     
+    function monthlyIntCalc(annualInterest){
+        annualInterest = annualInterest * .01;
+        console.log(Math.pow(parseFloat((1+parseFloat(annualInterest))), parseFloat((1/12)))-1);
+    }
+
+
+    
+    /**
+     * Copy of Excel's PMT function.
+     
+    *
+    * @param rate_per_period       The interest rate for the loan.
+    * @param number_of_payments    The total number of payments for the loan in months.
+    * @param present_value         The present value, or the total amount that a series of future payments is worth now;
+    *                              Also known as the principal.
+    * @param future_value          The future value, or a cash balance you want to attain after the last payment is made.
+    *                              If fv is omitted, it is assumed to be 0 (zero), that is, the future value of a loan is 0.
+    * @param type                  Optional, defaults to 0. The number 0 (zero) or 1 and indicates when payments are due.
+    *                              0 = At the end of period
+    *                              1 = At the beginning of the period
+    * @returns {number}
+    */
+    function pmt(rate_per_period, number_of_payments, present_value, future_value, type){
+        future_value = typeof future_value !== 'undefined' ? future_value : 0;
+        type = typeof type !== 'undefined' ? type : 0;
+
+        if(rate_per_period != 0.0){
+            // Interest rate exists
+            var q = Math.pow(1 + rate_per_period, number_of_payments);
+            return -(rate_per_period * (future_value + (q * present_value))) / ((-1 + q) * (1 + rate_per_period * (type)));
+
+        } else if(number_of_payments != 0.0){
+            // No interest rate, but number of payments exists
+            return -(future_value + present_value) / number_of_payments;
+        }
+
+        return 0;
+    }
+
+    // This function is from David Goodman's Javascript Bible.
+    function conv_number(expr, decplaces) {
+        var str = "" + Math.round(eval(expr) * Math.pow(10,decplaces));
+        while (str.length <= decplaces) {
+        str = "0" + str;
+        }
+    
+        var decpoint = str.length - decplaces;
+        return (str.substring(0,decpoint) + "." + str.substring(decpoint,str.length));
+    }
+    
+    // Parameters are rate, total number of periods, payment made each period and future value
+    function pv(rate, nper, pmt, fv) {
+        rate = parseFloat(rate);
+        nper = parseFloat(nper);
+        pmt = parseFloat(pmt);
+        fv = parseFloat(fv);
+        if ( nper == 0 ) {
+        alert("Why do you want to test me with zeros?");
+        return(0);       
+        }
+        if ( rate == 0 ) { // Interest rate is 0
+        pv_value = -(fv + (pmt * nper));
+        } else {
+        x = Math.pow(1 + rate, -nper); 
+        y = Math.pow(1 + rate, nper);
+        pv_value = - ( x * ( fv * rate - pmt + y * pmt )) / rate;
+        }
+        pv_value = conv_number(pv_value,2);
+        return (pv_value);
+    }
+    
+    function fv(rate, nper, pmt, pv) {
+        rate = parseFloat(rate);
+        nper = parseFloat(nper);
+        pmt = parseFloat(pmt);
+        pv = parseFloat(pv);
+        if ( nper == 0 ) {
+        alert("Why do you want to test me with zeros?");
+        return(0);
+        }
+        if ( rate == 0 ) { // Interest rate is 0
+        fv_value = -(pv + (pmt * nper));
+        } else {
+        x = Math.pow(1 + rate, nper);
+        fv_value = - ( -pmt + x * pmt + rate * x * pv ) /rate;
+        }
+        fv_value = conv_number(fv_value,2);
+        return (fv_value);
+    }
+
+    function calculateFOIR(){
+
+    }
+
+    function calculateMaxResRepPeriod(){
+        resRepPeriodObj.case1 = parseInt(Math.max(blncLoanTenure.val().trim(), blncPeriodRetirement.val().trim()), 10);
+        resRepPeriodObj.case2 = parseInt(Math.max(blncLoanTenure.val().trim(), blncPeriodRetirement.val().trim()), 10);
+        //resRepPeriodObj.case3 =  Mohit Sir to clarify
+    }
+
+    //function 
     /****************Calculations Starts Here*************** */
     $('#btnCalculate').click(function(){
         var accountType = $accType.val(); 
@@ -491,14 +605,14 @@ $(document).ready(function () {
         createAccObject(); //To Create Account level object
         calculateLTV(); //To Calculate LTV for all scenario
 
-        var maxOfSchmSnctdLTV = parseFloat(Math.max(sanctLTV.val().trim(), schmLTV.val().trim())).toFixed(2);
-        var maxOfBlncTenureRetirementAge = parseInt(Math.max(blncLoanTenure.val().trim(), blncPeriodRetirement.val().trim()), 10);
+        maxOfSchmSnctdLTV = parseFloat(Math.max(sanctLTV.val().trim(), schmLTV.val().trim())).toFixed(2);
+       // maxOfBlncTenureRetirementAge = parseInt(Math.max(blncLoanTenure.val().trim(), blncPeriodRetirement.val().trim()), 10);
             
         if(accountType  === "frr"){
             var stressPercentageFRR = calculateStress($('#latestInc-1').val().trim(), $('#feb20Inc-1').val().trim()) || 0;
             //var caseType = "";
             console.log("maxOfSchmSnctdLTV : "+maxOfSchmSnctdLTV);
-            console.log("maxOfBlncTenureRetirementAge : "+maxOfBlncTenureRetirementAge);
+           // console.log("maxOfBlncTenureRetirementAge : "+maxOfBlncTenureRetirementAge);
             if(stressPercentageFRR <= 25 || stressPercentageFRR === 0){
                 stressObj.case = "case-4";
                 stressObj.resolutionFramework = ["NA"];
@@ -550,9 +664,7 @@ $(document).ready(function () {
            
         }else if(accountType  === "od"){
             calculateConsolidatedIncome(od);
-        }
-        
-        else{
+        }else{
             
             console.log("Account Type None");
         }
