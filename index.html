@@ -50,6 +50,29 @@
 
   <!-- Begin page content -->
   <main role="main" class="container">
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Warning</h5>
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button> -->
+          </div>
+          <div class="modal-body">
+            <h6>Please do not refresh this page otherwise data will be lost and session will expire.
+               <br/> <br/>Don't press <b class="badge-warning" style="padding:0 5px">F5</b> or <b class="badge-warning" style="padding:0 5px">CTRL+R</b>. </h6>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">I Accept</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <div class="card bg-light">
       <div class="card-header">Account Related Information</div>
       <div class="card-body">

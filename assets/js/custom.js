@@ -62,6 +62,10 @@ $(document).ready(function () {
 
     /******Default function Initialisation starts here******/
     $('[data-toggle="tooltip"]').tooltip(); //Initializing  tooltip
+    $('#staticBackdrop').modal({
+        keyboard: false,
+        backdrop: 'static'
+      });
     /******Default function Initialisation ends here******/
 
     $accType.change(function () {        
