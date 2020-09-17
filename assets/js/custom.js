@@ -501,9 +501,7 @@ $(document).ready(function () {
 
 
     
-    /**
-     * Copy of Excel's PMT function.
-     
+    /** 
     *
     * @param rate_per_period       The interest rate for the loan.
     * @param number_of_payments    The total number of payments for the loan in months.
@@ -529,7 +527,6 @@ $(document).ready(function () {
             // No interest rate, but number of payments exists
             return -(future_value + present_value) / number_of_payments;
         }
-
         return 0;
     }
 
