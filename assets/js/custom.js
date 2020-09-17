@@ -661,7 +661,7 @@ $(document).ready(function () {
             calculateConsolidatedIncome("loan");
            
         }else if(accountType  === "od"){
-            calculateConsolidatedIncome(od);
+            calculateConsolidatedIncome("od");
         }else{
             
             console.log("Account Type None");
