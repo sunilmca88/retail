@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="./assets/css/custom.css"> 
+  <style>
+
+    .col {width: 100%;}
+    @media only screen and (min-width: 768px) {
+      /*For desktop*/
+      .col {width: 30%;}
+    }
+   
+
+    body > .container {
+      padding: 70px 10px 0;
+      margin-bottom: 75px;       
+    }
+    body {
+      /* Margin bottom by footer height */
+      /* min-height: 75rem; */
+      padding-top: 4.5rem;
+    }
+  </style>
+  <title>Retail</title>
+</head>
+
+<body>
+  <header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-light">
+      <a class="navbar-brand" href="#">
+        <img src="./assets/img/logo.png" alt="Logo" style="width:150px;">
+      </a>
+    </nav>
+  </header>
+
+  <!-- Begin page content -->
+  <main role="main" class="container col">
+    <div class="card bg-light">
+      <div class="card-header"><b>Login</b></div>
+      <div class="card-body">
+        <!--ROW 1 STARTS HERE-->
+        <div class="row" id="genOTP">
+          <div class="col-sm-12">
+            <label for="accNo">Account Number*</label>
+            <input type="tel" class="form-control" id="accNo" placeholder="Enter Account Number">
+          </div>
+          <div class="col-sm-12">
+            <br/>
+          </div>
+          <div class="col-sm-12">
+            <label for="mobNo">Mobile Number*</label>
+            <input type="tel" class="form-control" id="mobNo" placeholder="Enter Mobile Number">
+            <small class="font-weight-light font-italic">Mobile number should be linked with account entered above</small>
+          </div>
+          <div class="col-sm-12">
+            <br/>
+          </div>
+          <div class="col-sm-12">
+            <button type="button" class="btn btn-warning" style="width:100%;" id="btnGenOTP">Generate OTP</button>
+          </div>
+        </div>
+        <!--ROW 1 ENDS HERE-->
+
+         <!--ROW 2 STARTS HERE-->
+         <div class="row" id="validateOTP" >
+          <div class="col-sm-12">
+            <label>Account Number*</label>
+            <input type="tel" class="form-control" placeholder="Enter Account Number" id="hidTxtAccNo" disabled>
+          </div>
+          
+          <div class="col-sm-12">
+            <label>Mobile Number*</label>
+            <input type="tel" class="form-control" placeholder="Enter Mobile Number" id="hidTxtMobNo" disabled>            
+          </div>
+          <div class="col-sm-12">
+            <br/>
+          </div>
+          <div class="col-sm-12">
+            <label for="txtOTP">OTP*</label>
+            <input type="password" class="form-control" id="txtOTP" placeholder="Enter 8 Digit OTP">
+            <small class="font-weight-light font-italic">Enter OTP recevied on registered mobile number</small>
+          </div>
+          <div class="col-sm-12">
+            <br/>
+          </div>
+          <div class="col-sm-12">
+            <button type="button" class="btn btn-warning" style="width:100%;">Validate OTP</button>
+          </div>
+        </div>
+        <!--ROW 2 ENDS HERE-->
+      </div>
+    </div>
+
+   
+  </main>
+
+  
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="./assets/js/jquery-3.2.1.slim.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('#validateOTP').hide();
+      $('#btnGenOTP').click(function(){
+        $('#genOTP').hide();
+        $('#hidTxtAccNo').val($('#accNo').val());
+        $('#hidTxtMobNo').val($('#mobNo').val());
+        $('#validateOTP').show();
+      });
+    });
+  </script>
+</body>
+
+</html>
