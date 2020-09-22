@@ -29,6 +29,11 @@
       /* min-height: 75rem; */
       padding-top: 4.5rem;
     }
+    .btn-bob {
+        color: #fff;
+        background-color: #ff6633;
+        border-color: #ff6633;
+    }
   </style>
   <title>Retail</title>
 </head>
@@ -66,7 +71,7 @@
             <br/>
           </div>
           <div class="col-sm-12">
-            <button type="button" class="btn btn-warning" style="width:100%;" id="btnGenOTP">Generate OTP</button>
+            <button type="button" class="btn btn-bob" style="width:100%;" id="btnGenOTP">Generate OTP</button>
           </div>
         </div>
         <!--ROW 1 ENDS HERE-->
@@ -87,14 +92,14 @@
           </div>
           <div class="col-sm-12">
             <label for="txtOTP">OTP*</label>
-            <input type="password" class="form-control" id="txtOTP" placeholder="Enter 8 Digit OTP">
+            <input type="tel" class="form-control" id="txtOTP" placeholder="Enter 8 Digit OTP">
             <small class="font-weight-light font-italic">Enter OTP recevied on registered mobile number</small>
           </div>
           <div class="col-sm-12">
             <br/>
           </div>
           <div class="col-sm-12">
-            <button type="button" class="btn btn-warning" style="width:100%;" id="submitOTP">Submit OTP</button>
+            <button type="button" class="btn btn-bob" style="width:100%;" id="submitOTP">Submit OTP</button>
           </div>
         </div>
         <!--ROW 2 ENDS HERE-->
@@ -158,7 +163,7 @@
           $('#modalMsg').text("Please enter 8 digit OTP and then click submit OTP button.");
           $('#staticBackdrop').modal();
         }else{
-          window.location.replace("./index.html");
+          window.location.replace("./custindex");
           //window.location.href = "./index.html";
         }
 
