@@ -93,7 +93,8 @@ $(document).ready(function () {
             /********Updating No of Applicants Options Ends here**************/
             
             $('#unsrvcdInt').val("").attr('disabled', true);
-            $('#sanctndAmt').val("").attr('disabled', true);
+            $('#sanctndAmt').removeAttr("disabled");
+            $('#blncLoanTenure').removeAttr("disabled");
         } else if ("frr" === selectedAccType) {
             isFRR = "disabled";
             $accSchm.append($("<option></option>")
@@ -108,6 +109,7 @@ $(document).ready(function () {
             
             $('#unsrvcdInt').val("").attr('disabled', true);
             $('#sanctndAmt').val("").attr('disabled', true);
+            $('#blncLoanTenure').val("").attr('disabled', true);
             incomeSrc =  ["Latest Rent", "Rent in Feb 2020"];
         } else if ("od" === selectedAccType) {
             //isOD= "";
@@ -128,7 +130,7 @@ $(document).ready(function () {
 
             $('#unsrvcdInt').removeAttr("disabled");
             $('#sanctndAmt').removeAttr("disabled");
-            
+            $('#blncLoanTenure').removeAttr("disabled");            
         } else {
             $accSchm.attr('disabled', true);
         }

@@ -79,6 +79,10 @@
         <!--ROW 1 STARTS HERE-->
         <div class="row">
           <div class="col-sm">
+            <label for="accNo">Account Number</label>
+            <input type="tel" class="form-control" id="accNo" placeholder="Enter Account No." value="29040100002323">
+          </div>
+          <div class="col-sm">
             <label for="accType">Account Type</label>
             <select id="accType" class="form-control">
               <option value="" selected disabled>Select</option>
@@ -93,11 +97,7 @@
               <option selected disabled>Select</option>
               <!-- Options will be loaded dynamically with JS -->
             </select>
-          </div>
-          <div class="col-sm">
-            <label for="accNo">Account Number</label>
-            <input type="tel" class="form-control" id="accNo" placeholder="Enter Account No." value="29040100002323">
-          </div>
+          </div>          
           <div class="col-sm">
             <label for="noOfApplicant">Number of Applicants</label>
             <select id="noOfApplicant" class="form-control" disabled>
@@ -114,6 +114,18 @@
         <!--ROW 2 STARTS HERE-->
         <div class="row">
           <div class="col-sm">
+            <label for="prsntOutstdng">Present Outstanding</label>
+            <input type="tel" class="form-control" id="prsntOutstdng" placeholder="Enter Value">
+          </div>         
+          <div class="col-sm">
+            <label for="valOfSecurity">Value of Security</label>
+            <input type="tel" class="form-control" id="valOfSecurity" placeholder="Enter Value">
+          </div>
+          <div class="col-sm">
+            <label for="proposedROI">Proposed ROI</label>
+            <input type="tel" class="form-control" id="proposedROI" placeholder="Enter Value">
+          </div>
+          <div class="col-sm">
             <label for="sanctLTV" data-toggle="tooltip" title="LTV as per sanctioned terms">
               Santioned LTV <sup><span class="badge badge-warning">i</span></sup>
             </label>
@@ -124,19 +136,7 @@
               Schematic LTV <sup><span class="badge badge-warning">i</span></sup>
             </label>
             <input type="tel" class="form-control" id="schmLTV" placeholder="Enter Value">
-          </div>
-          <div class="col-sm">
-            <label for="prsntOutstdng">Present Outstanding</label>
-            <input type="tel" class="form-control" id="prsntOutstdng" placeholder="Enter Value">
-          </div>
-          <div class="col-sm">
-            <label for="valOfSecurity">Value of Security</label>
-            <input type="tel" class="form-control" id="valOfSecurity" placeholder="Enter Value">
-          </div>
-          <div class="col-sm">
-            <label for="proposedROI">Proposed ROI</label>
-            <input type="tel" class="form-control" id="proposedROI" placeholder="Enter Value">
-          </div>
+          </div> 
         </div>
         <!--ROW 2 ENDS HERE-->
         <br />
@@ -157,8 +157,8 @@
           </div>
 
           <div class="col-sm">
-            <label for="blncLoanTenure">Loan Balance Tenure(in months)</label>
-            <input type="tel" class="form-control" id="blncLoanTenure" placeholder="Enter Value">
+            <label for="blncLoanTenure">Balance Tenure(in months)</label>
+            <input type="tel" class="form-control" id="blncLoanTenure" placeholder="Enter Value" disabled>
           </div>
           <div class="col-sm">
             <label for="blncPeriodRetirement">Balance Period upto Retirement</label>
