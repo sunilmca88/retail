@@ -94,10 +94,35 @@
             <br/>
           </div>
           <div class="col-sm-12">
-            <button type="button" class="btn btn-warning" style="width:100%;">Validate OTP</button>
+            <button type="button" class="btn btn-warning" style="width:100%;" id="submitOTP">Submit OTP</button>
           </div>
         </div>
         <!--ROW 2 ENDS HERE-->
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Error</h5>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button> -->
+              </div>
+              <div class="modal-body">
+                <h6 id="modalMsg"></h6>
+                  <!-- <br/> <br/>Don't press <b class="badge-warning" style="padding:0 5px">F5</b> or <b class="badge-warning" style="padding:0 5px">CTRL+R</b>. </h6> -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">I Understand</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
       </div>
     </div>
 
@@ -108,16 +133,38 @@
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="./assets/js/jquery-3.2.1.slim.min.js"></script>
+  <script src="./assets/js/jquery-3.2.1.slim.min.js"></script>  
+  <script src="./assets/js/bootstrap.min.js"></script>
+
   <script type="text/javascript">
     $(document).ready(function () {
       $('#validateOTP').hide();
+
       $('#btnGenOTP').click(function(){
-        $('#genOTP').hide();
-        $('#hidTxtAccNo').val($('#accNo').val());
-        $('#hidTxtMobNo').val($('#mobNo').val());
-        $('#validateOTP').show();
+        if("" === $('#accNo').val().trim() || "" === $('#mobNo').val().trim()){
+          $('#modalMsg').text("Please enter account number and mobile number and then click generate OTP button.");
+          $('#staticBackdrop').modal();
+        }else{
+          $('#genOTP').hide();
+          $('#hidTxtAccNo').val($('#accNo').val());
+          $('#hidTxtMobNo').val($('#mobNo').val());
+          $('#validateOTP').show();
+        } 
+        
       });
+
+      $('#submitOTP').click(function(){
+        if("" === $('#txtOTP').val().trim()){
+          $('#modalMsg').text("Please enter 8 digit OTP and then click submit OTP button.");
+          $('#staticBackdrop').modal();
+        }else{
+          window.location.replace("./index.html");
+          //window.location.href = "./index.html";
+        }
+
+      });
+
+
     });
   </script>
 </body>
