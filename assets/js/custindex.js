@@ -56,6 +56,14 @@ $(document).ready(function () {
     /******Default function Initialisation ends here******/
 
     $borrowerType.change(function(){
+        $('#txtCombinedLatestSalary').val("");
+        $('#txtCombinedFeb20Salary').val("");
+        $('#txtCombinedLatestGMBR').val("");
+        $('#txtCombinedFeb20GMBR').val("");
+        $('#gmbrType').val("GMBR2019").change();
+        $('#txtLatestRent').val("");
+        $('#txtFeb20Rent').val("");
+
         $('#rowResult').hide();
         selectedBorrowerType = $('option:selected', this).val();
         if("sal" === selectedBorrowerType){
@@ -84,6 +92,7 @@ $(document).ready(function () {
 
     $gmbrType.change(function(){
         $('#rowResult').hide();
+        $('#txtCombinedFeb20GMBR').val("");
         var selectedGMBRType = $('option:selected', this).val();
         if("GMBR2019" === selectedGMBRType){
             $('#lblGMBR1920').html("Combined GMBR of all Other Individuals during Same month in 2019 <sup><span class='badge badge-warning'>i</span></sup>");
@@ -105,7 +114,8 @@ $(document).ready(function () {
             console.log("Calculated Stress: "+ parseFloat((((feb20Inc-latestInc)/feb20Inc)*100).toFixed(2)));
             return parseFloat((((feb20Inc-latestInc)/feb20Inc)*100).toFixed(2));
         }else{
-            alert("Wrong data");
+            $('#errTxt').text("There is some error in entered data. Please recheck.");
+            $('#staticBackdrop').modal();
             return 0;
         }
     };
@@ -119,10 +129,10 @@ $(document).ready(function () {
             if("" != latestInc && "" != feb20Inc && $.isNumeric(latestInc) && $.isNumeric(feb20Inc)){
                 stressPercentage = calculateStress(latestInc, feb20Inc) || 0;
                 if(stressPercentage <= 25){
-                    $('#percentage').html("You are <b>not eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
+                    $('#result').html("You are <b>not eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
                     $('#rowResult').show();
                 }else{
-                    $('#percentage').html("You are <b>eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
+                    $('#result').html("You are <b>eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
                     $('#rowResult').show();
                 }                
             }else{
@@ -136,10 +146,10 @@ $(document).ready(function () {
             if("" != latestInc && "" != feb20Inc && $.isNumeric(latestInc) && $.isNumeric(feb20Inc)){
                 stressPercentage = calculateStress(latestInc, feb20Inc) || 0;
                 if(stressPercentage < 50){
-                    $('#percentage').html("You are <b>not eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
+                    $('#result').html("You are <b>not eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
                     $('#rowResult').show();
                 }else{
-                    $('#percentage').html("You are <b>eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
+                    $('#result').html("You are <b>eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
                     $('#rowResult').show();
                 }
             }else{
@@ -158,11 +168,11 @@ $(document).ready(function () {
                 var salStressPercentage = calculateStress(latestInc, feb20Inc) || 0;
                 var GMBRStressPercentage = calculateStress(latestGMBR, feb20GMBR) || 0;
                 if(salStressPercentage <= 25 && GMBRStressPercentage < 50){
-                    $('#percentage').html("You are <b>not eligible</b> as Stress percentage of Salary Income is  <b>" +salStressPercentage+"%</b>"+
+                    $('#result').html("You are <b>not eligible</b> as Stress percentage of Salary Income is  <b>" +salStressPercentage+"%</b>"+
                     "and that of GMBR Income is <b>"+ GMBRStressPercentage +"%</b>");
                     $('#rowResult').show();
                 }else{
-                    $('#percentage').html("You are <b>eligible</b> as Stress percentage of Salary Income is  <b>" +salStressPercentage+"%</b>"+
+                    $('#result').html("You are <b>eligible</b> as Stress percentage of Salary Income is  <b>" +salStressPercentage+"%</b>"+
                     "and that of GMBR Income is <b>"+ GMBRStressPercentage +"%</b>");
                     $('#rowResult').show();
                 }                
@@ -176,10 +186,10 @@ $(document).ready(function () {
             if("" != latestInc && "" != feb20Inc && $.isNumeric(latestInc) && $.isNumeric(feb20Inc)){
                 stressPercentage = calculateStress(latestInc, feb20Inc) || 0;
                 if(stressPercentage <= 25){
-                    $('#percentage').html("You are <b>not eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
+                    $('#result').html("You are <b>not eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
                     $('#rowResult').show();
                 }else{
-                    $('#percentage').html("You are <b>eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
+                    $('#result').html("You are <b>eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
                     $('#rowResult').show();
                 }
             }else{

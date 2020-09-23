@@ -56,8 +56,8 @@
         <!--ROW 1 STARTS HERE-->
         <div class="row" id="genOTP">
           <div class="col-sm-12">
-            <label for="accNo">Account Number*</label>
-            <input type="tel" class="form-control" id="accNo" placeholder="Enter Account Number">
+            <label for="accNo">Loan Account Number*</label>
+            <input type="tel" class="form-control" id="accNo" placeholder="Enter Loan Account Number">
           </div>
           <div class="col-sm-12">
             <br/>
@@ -79,8 +79,8 @@
          <!--ROW 2 STARTS HERE-->
          <div class="row" id="validateOTP" >
           <div class="col-sm-12">
-            <label>Account Number*</label>
-            <input type="tel" class="form-control" placeholder="Enter Account Number" id="hidTxtAccNo" disabled>
+            <label>Loan Account Number*</label>
+            <input type="tel" class="form-control" placeholder="Enter Loan Account Number" id="hidTxtAccNo" disabled>
           </div>
           
           <div class="col-sm-12">
@@ -144,10 +144,23 @@
   <script type="text/javascript">
     $(document).ready(function () {
       $('#validateOTP').hide();
-
+      
       $('#btnGenOTP').click(function(){
-        if("" === $('#accNo').val().trim() || "" === $('#mobNo').val().trim()){
+        var accNo = $('#accNo').val().trim();
+        var mobNo = $('#mobNo').val().trim();
+        if("" === accNo || "" === mobNo){
           $('#modalMsg').text("Please enter account number and mobile number and then click generate OTP button.");
+          $('#staticBackdrop').modal();
+        }else if(!$.isNumeric(accNo) || !$.isNumeric(mobNo)){
+          $('#modalMsg').text("Only Numbers are allowed");
+          $('#staticBackdrop').modal();
+          $('#accNo').val("");
+          $('#mobNo').val("");
+        }else if(accNo.length < 14 || accNo.length > 16){
+          $('#modalMsg').text("Recheck Account Number length. It should be between 14 to 16");
+          $('#staticBackdrop').modal();
+        }else if(mobNo.length != 10){
+          $('#modalMsg').text("Recheck Mobile Number length. It should be between 10 digits withput country code");
           $('#staticBackdrop').modal();
         }else{
           $('#genOTP').hide();
@@ -159,9 +172,11 @@
       });
 
       $('#submitOTP').click(function(){
-        if("" === $('#txtOTP').val().trim()){
+        var OTP = $('#txtOTP').val().trim();
+        if("" === OTP || !$.isNumeric(OTP) || OTP.length != 8){
           $('#modalMsg').text("Please enter 8 digit OTP and then click submit OTP button.");
           $('#staticBackdrop').modal();
+          $('#txtOTP').val("");
         }else{
           window.location.replace("./custindex");
           //window.location.href = "./index.html";
