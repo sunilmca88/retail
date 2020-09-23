@@ -137,16 +137,25 @@
         <!--ROW 3 STARTS HERE-->
         <div class="row" id="rowGMBR">
             <div class="col-sm">
-              <label for="txtCombinedLatestSalary" data-toggle="tooltip" title="GMBR: Gross Monthly Business Receipts">
+              <label for="txtCombinedLatestGMBR" data-toggle="tooltip" title="GMBR: Gross Monthly Business Receipts">
                 Combined GMBR of all Other Individuals during last month <sup><span class="badge badge-warning">i</span></sup>
               </label>
-              <input type="tel" class="form-control" id="txtCombinedLatestSalary" placeholder="Enter Value">
+              <input type="tel" class="form-control" id="txtCombinedLatestGMBR" placeholder="Enter Value">
             </div>
             <div class="col-sm">
-              <label for="txtCombinedFeb20Salary" data-toggle="tooltip" title="GMBR: Gross Monthly Business Receipts">
+              <label for="gmbrType">GMBR Options (If GMBR of Same month in 2019 is available else choose GMBR of Feb 20)</label>
+              <select id="gmbrType" class="form-control">
+                <!-- <option selected disabled>Select</option> -->
+                <option value="GMBR2019" selected>GMBR of Same month in 2019</option>
+                <option value="GMBR2020">GMBR of February 2020</option>
+                <!-- Options will be loaded dynamically with JS -->
+              </select>
+            </div>
+            <div class="col-sm">
+              <label for="txtCombinedFeb20GMBR" id = "lblGMBR1920" data-toggle="tooltip" title="GMBR: Gross Monthly Business Receipts">
                   Combined GMBR of all Other Individuals during Same month in 2019 <sup><span class="badge badge-warning">i</span></sup>
               </label>
-              <input type="tel" class="form-control" id="txtCombinedFeb20Salary" placeholder="Enter Value">
+              <input type="tel" class="form-control" id="txtCombinedFeb20GMBR" placeholder="Enter Value">
             </div> 
         </div>
         <!--ROW 3 ENDS HERE-->
