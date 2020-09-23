@@ -69,7 +69,7 @@
           </div>
           <div class="col-sm-12">
             <label for="accNo">Loan Account Number*</label>
-            <input type="tel" class="form-control" id="accNo" placeholder="Enter Loan Account Number">
+            <input type="tel" class="form-control" id="accNo" placeholder="Enter Loan Account Number" disabled>
             <small class="font-weight-light font-italic" id="eVijayaMsg">
               In case you are a customer of eVijaya bank please enter your new account number only.
               <a href="https://apps.bobinside.com/accmap/" target="_blank"><b>Click here</b></a> to know your new account number 
@@ -80,14 +80,14 @@
           </div> -->
           <div class="col-sm-12">
             <label for="mobNo">Mobile Number*</label>
-            <input type="tel" class="form-control" id="mobNo" placeholder="Enter Mobile Number">
+            <input type="tel" class="form-control" id="mobNo" placeholder="Enter Mobile Number" disabled>
             <small class="font-weight-light font-italic">Mobile number should be linked with account entered above</small>
           </div>
           <!-- <div class="col-sm-12">
             <br/>
           </div> -->
           <div class="col-sm-12">
-            <button type="button" class="btn btn-bob" style="width:100%;" id="btnGenOTP">Generate OTP</button>
+            <button type="button" class="btn btn-bob" style="width:100%;" id="btnGenOTP" disabled>Generate OTP</button>
           </div>
         </div>
         
@@ -137,7 +137,7 @@
                   <!-- <br/> <br/>Don't press <b class="badge-warning" style="padding:0 5px">F5</b> or <b class="badge-warning" style="padding:0 5px">CTRL+R</b>. </h6> -->
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">I Understand</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
               </div>
             </div>
           </div>
@@ -179,7 +179,7 @@
           $('#mobNo').val("");
         }else if(accNo.length != 14){
           $('#staticBackdropLabel').html("Error");
-          $('#modalMsg').text("Recheck Account Number length. It should be between 14 to 16");
+          $('#modalMsg').text("Recheck Account Number length. It should be 14");
           $('#staticBackdrop').modal();
         }else if(mobNo.length != 10){
           $('#staticBackdropLabel').html("Error");
@@ -189,6 +189,9 @@
           $('#genOTP').hide();
           $('#hidTxtAccNo').val($('#accNo').val());
           $('#hidTxtMobNo').val($('#mobNo').val());
+          $('#staticBackdropLabel').html("Information");
+          $('#modalMsg').text("OTP sent to your number XXXXX1916");
+          $('#staticBackdrop').modal();
           $('#validateOTP').show();
         } 
         
