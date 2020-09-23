@@ -56,16 +56,15 @@ $(document).ready(function () {
     /******Default function Initialisation ends here******/
 
     $borrowerType.change(function(){
+        selectedBorrowerType = $('option:selected', this).val();
         $('#txtCombinedLatestSalary').val("");
         $('#txtCombinedFeb20Salary').val("");
         $('#txtCombinedLatestGMBR').val("");
-        $('#txtCombinedFeb20GMBR').val("");
-        $('#gmbrType').val("GMBR2019").change();
+        $('#txtCombinedFeb20GMBR').val("");       
         $('#txtLatestRent').val("");
         $('#txtFeb20Rent').val("");
-
         $('#rowResult').hide();
-        selectedBorrowerType = $('option:selected', this).val();
+        $('#gmbrType').val("GMBR2019").change();
         if("sal" === selectedBorrowerType){
             $('#rowSal').show();
             $('#rowGMBR').hide();
@@ -73,11 +72,16 @@ $(document).ready(function () {
             $('#lblCombinedLatestSalary').html('Combined Latest Salary of all Borrowers <sup><span class="badge btn-bob">i</span></sup>');
             $('#lblCombinedFeb20Salary').html('Combined Salary of all Borrowers as on 29 Feb 2020 <sup><span class="badge btn-bob">i</span></sup>');
         }else if("oth" === selectedBorrowerType){
+            $('#lblCombinedLatestGMBR').html('Combined GMBR of all Borrowers during last month <sup><span class="badge btn-bob">i</span></sup>');
+            $('#lblGMBR1920').html('Combined GMBR of all Borrowers during Same month in 2019 <sup><span class="badge btn-bob">i</span></sup>');
             $('#rowSal').hide();
             $('#rowGMBR').show();
             $('#rowRent').hide();   
         }else if("salAndOth" === selectedBorrowerType){
-
+            $('#lblCombinedLatestSalary').html('Combined Latest Salary of all Salaried Borrowers <sup><span class="badge btn-bob">i</span></sup>');
+            $('#lblCombinedFeb20Salary').html('Combined Salary of all Salaried Borrowers as on 29 Feb 2020 <sup><span class="badge btn-bob">i</span></sup>');
+            $('#lblCombinedLatestGMBR').html('Combined GMBR of all Other Individuals Borrowers during last month <sup><span class="badge btn-bob">i</span></sup>');
+            $('#lblGMBR1920').html('Combined GMBR of all Other Individuals Borrowers during Same month in 2019 <sup><span class="badge btn-bob">i</span></sup>');
             $('#rowSal').show();
             $('#rowGMBR').show();
             $('#rowRent').hide();   
@@ -97,15 +101,20 @@ $(document).ready(function () {
         $('#rowResult').hide();
         $('#txtCombinedFeb20GMBR').val("");
         var selectedGMBRType = $('option:selected', this).val();
-        if("GMBR2019" === selectedGMBRType){
-            $('#lblGMBR1920').html("Combined GMBR of all Borrowers during Same month of 2019 <sup><span class='badge badge-warning'>i</span></sup>");
-            
-        }else if("GMBR2020" === selectedGMBRType){
-            $('#lblGMBR1920').html("Combined GMBR of all Borrowers during Feb 2020 <sup><span class='badge badge-warning'>i</span></sup>");
-        }else{
-            $('#errTxt').text("There is some error on page");
-            $('#staticBackdrop').modal();
-        }
+        //console.log("AAAAAAAAAAAAAA"+selectedGMBRType);
+        //console.log("BBBBBBBBBBBBB"+selectedBorrowerType);
+        if("GMBR2019" === selectedGMBRType && "oth" === selectedBorrowerType){
+            $('#lblGMBR1920').html("Combined GMBR of all Borrowers during Same month of 2019 <sup><span class='badge btn-bob'>i</span></sup>");
+        }else if("GMBR2020" === selectedGMBRType  && "oth" === selectedBorrowerType){
+            $('#lblGMBR1920').html("Combined GMBR of all Borrowers during Feb 2020 <sup><span class='badge btn-bob'>i</span></sup>");
+        }else if("GMBR2019" === selectedGMBRType && "salAndOth" === selectedBorrowerType){
+            $('#lblGMBR1920').html('Combined GMBR of all Other Individuals Borrowers during Same month in 2019 <sup><span class="badge btn-bob">i</span></sup>');
+        }else if("GMBR2020" === selectedGMBRType  && "salAndOth" === selectedBorrowerType){
+            $('#lblGMBR1920').html('Combined GMBR of all Other Individuals Borrowers during Feb 2020 <sup><span class="badge btn-bob">i</span></sup>');
+        }// else{
+        //     $('#errTxt').text("There is some error on page");
+        //     $('#staticBackdrop').modal();
+        // }
     });
 
    
@@ -123,6 +132,16 @@ $(document).ready(function () {
         }
     };
 
+    function showSuccessResult(){
+        $('#result').html("You are <b>eligible</b> for resolution under framework. Please download the application form as per link below and approach base branch for necessary approval.");
+        $('#rowResult').show();
+    }
+
+    function showFailureResult(){
+        $('#result').html("You are <b>Not Eligible</b> for resolution as per Bank's extant norms. Kindly contact your base Branch for clarifications.");
+        $('#rowResult').show();
+    }
+
     $('#btnChkElgblty').click(function(){
         $('#rowResult').hide();
         var latestInc = 0, feb20Inc = 0, stressPercentage = 0;
@@ -132,13 +151,15 @@ $(document).ready(function () {
             if("" != latestInc && "" != feb20Inc && $.isNumeric(latestInc) && $.isNumeric(feb20Inc)){
                 stressPercentage = calculateStress(latestInc, feb20Inc) || 0;
                 if(stressPercentage <= 25){
-                    $('#result').html("You are <b>not eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
-                    //$('#result').html("You are not eligible ");
-                    $('#rowResult').show();
+                    showFailureResult();
+                    // $('#result').html("You are <b>not eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
+                    // $('#result').html("You are <b>Not Eligible</b> for resolution as per Bank's extant norms. Kindly contact your base Branch for clarifications.");
+                    // $('#rowResult').show();
                 }else{
+                    showSuccessResult();
                     // $('#result').html("You are <b>eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
-                    $('#result').html("You are <b>eligible</b> for resolution under framework. Please download the application form as per link below and approach base branch for necessary approval.");
-                    $('#rowResult').show();
+                    // $('#result').html("You are <b>eligible</b> for resolution under framework. Please download the application form as per link below and approach base branch for necessary approval.");
+                    // $('#rowResult').show();
                 }                
             }else{
                 $('#errTxt').text("All fields are mandatory and only numbers are allowed");
@@ -151,11 +172,14 @@ $(document).ready(function () {
             if("" != latestInc && "" != feb20Inc && $.isNumeric(latestInc) && $.isNumeric(feb20Inc)){
                 stressPercentage = calculateStress(latestInc, feb20Inc) || 0;
                 if(stressPercentage < 50){
-                    $('#result').html("You are <b>not eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
-                    $('#rowResult').show();
+                    showFailureResult();
+                    //$('#result').html("You are <b>not eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
+                    // $('#result').html("You are <b>Not Eligible</b> for resolution as per Bank's extant norms. Kindly contact your base Branch for clarifications.");
+                    // $('#rowResult').show();
                 }else{
-                    $('#result').html("You are <b>eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
-                    $('#rowResult').show();
+                    showSuccessResult();
+                    // $('#result').html("You are <b>eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
+                    // $('#rowResult').show();
                 }
             }else{
                 $('#errTxt').text("All fields are mandatory and only numbers are allowed");
@@ -173,13 +197,15 @@ $(document).ready(function () {
                 var salStressPercentage = calculateStress(latestInc, feb20Inc) || 0;
                 var GMBRStressPercentage = calculateStress(latestGMBR, feb20GMBR) || 0;
                 if(salStressPercentage <= 25 && GMBRStressPercentage < 50){
-                    $('#result').html("You are <b>not eligible</b> as Stress percentage of Salary Income is  <b>" +salStressPercentage+"%</b>"+
-                    "and that of GMBR Income is <b>"+ GMBRStressPercentage +"%</b>");
-                    $('#rowResult').show();
+                    // $('#result').html("You are <b>not eligible</b> as Stress percentage of Salary Income is  <b>" +salStressPercentage+"%</b>"+
+                    // "and that of GMBR Income is <b>"+ GMBRStressPercentage +"%</b>");
+                    // $('#rowResult').show();
+                    showFailureResult();
                 }else{
-                    $('#result').html("You are <b>eligible</b> as Stress percentage of Salary Income is  <b>" +salStressPercentage+"%</b>"+
-                    "and that of GMBR Income is <b>"+ GMBRStressPercentage +"%</b>");
-                    $('#rowResult').show();
+                    // $('#result').html("You are <b>eligible</b> as Stress percentage of Salary Income is  <b>" +salStressPercentage+"%</b>"+
+                    // "and that of GMBR Income is <b>"+ GMBRStressPercentage +"%</b>");
+                    // $('#rowResult').show();
+                    showSuccessResult();
                 }                
             }else{
                 $('#errTxt').text("All fields are mandatory and only numbers are allowed");
@@ -191,11 +217,13 @@ $(document).ready(function () {
             if("" != latestInc && "" != feb20Inc && $.isNumeric(latestInc) && $.isNumeric(feb20Inc)){
                 stressPercentage = calculateStress(latestInc, feb20Inc) || 0;
                 if(stressPercentage <= 25){
-                    $('#result').html("You are <b>not eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
-                    $('#rowResult').show();
+                    // $('#result').html("You are <b>not eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
+                    // $('#rowResult').show();
+                    showFailureResult();
                 }else{
-                    $('#result').html("You are <b>eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
-                    $('#rowResult').show();
+                    showSuccessResult();
+                    // $('#result').html("You are <b>eligible</b> as Stress percentage is <b>" +stressPercentage+"%</b>");
+                    // $('#rowResult').show();
                 }
             }else{
                 $('#errTxt').text("All fields are mandatory and only numbers are allowed");

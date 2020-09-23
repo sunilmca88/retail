@@ -161,7 +161,7 @@
           $('#staticBackdrop').modal();
           $('#accNo').val("");
           $('#mobNo').val("");
-        }else if(accNo.length < 12 || accNo.length > 15){
+        }else if(accNo.length != 14){
           $('#modalMsg').text("Recheck Account Number length. It should be between 14 to 16");
           $('#staticBackdrop').modal();
         }else if(mobNo.length != 10){
