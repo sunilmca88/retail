@@ -81,7 +81,7 @@
 
 
     <div class="card bg-light">
-      <div class="card-header">Account Related Information</div>
+      <div class="card-header text-center"><b>Eligibility for Resolution Framework</b></div>
       <div class="card-body">
         <!--ROW 1 STARTS HERE-->
         <div class="row">
@@ -95,24 +95,24 @@
               <option value="" selected disabled>Select</option>
               <option value="sal">Salaried</option>
               <option value="oth">Other Individuals(Self-Employed/Businessman)</option>
-              <option value="laFrr">Loan against FRR</option>
+              <option value="laFrr">Loan against Rent Receivables</option>
               <option value="salAndOth">Salaried and Other Individuals Both</option>
             </select>
           </div>
         </div>
         <!--ROW 1 ENDS HERE-->
-        
+
         <!--ROW 2 STARTS HERE-->
         <div class="row" id="rowSal">
           <div class="col-sm">
-            <label for="txtCombinedLatestSalary" data-toggle="tooltip" title="Sum of latest/current salary of all co-borrowers">
-              Combined Latest Salary of all Borrowers <sup><span class="badge badge-warning">i</span></sup>
+            <label for="txtCombinedLatestSalary" id="lblCombinedLatestSalary" data-toggle="tooltip" title="Sum of latest/current salary of all co-borrowers">
+              Combined Latest Salary of all Borrowers <sup><span class="badge btn-bob">i</span></sup>
             </label>
             <input type="tel" class="form-control" id="txtCombinedLatestSalary" placeholder="Enter Value">
           </div>
           <div class="col-sm">
-            <label for="txtCombinedFeb20Salary" data-toggle="tooltip" title="Sum of salary of all co-borrowers in February 2020">
-                Combined Salary of all Borrowers as on 29 Feb 2020 <sup><span class="badge badge-warning">i</span></sup>
+            <label for="txtCombinedFeb20Salary" id="lblCombinedFeb20Salary" data-toggle="tooltip" title="Sum of salary of all co-borrowers in February 2020">
+                Combined Salary of all Borrowers as on 29 Feb 2020 <sup><span class="badge btn-bob">i</span></sup>
             </label>
             <input type="tel" class="form-control" id="txtCombinedFeb20Salary" placeholder="Enter Value">
           </div> 
@@ -121,8 +121,8 @@
         <!--ROW 3 STARTS HERE-->
         <div class="row" id="rowGMBR">
             <div class="col-sm">
-              <label for="txtCombinedLatestGMBR" data-toggle="tooltip" title="GMBR: Gross Monthly Business Receipts">
-                Combined GMBR of all Borrowers during last month <sup><span class="badge badge-warning">i</span></sup>
+              <label for="txtCombinedLatestGMBR" id="lblCombinedLatestGMBR" data-toggle="tooltip" title="GMBR: Gross Monthly Business Receipts">
+                Combined GMBR of all Borrowers during last month <sup><span class="badge btn-bob">i</span></sup>
               </label>
               <input type="tel" class="form-control" id="txtCombinedLatestGMBR" placeholder="Enter Value">
             </div>
@@ -137,7 +137,7 @@
             </div>
             <div class="col-sm">
               <label for="txtCombinedFeb20GMBR" id = "lblGMBR1920" data-toggle="tooltip" title="GMBR: Gross Monthly Business Receipts">
-                  Combined GMBR of all Borrowers during Same month in 2019 <sup><span class="badge badge-warning">i</span></sup>
+                  Combined GMBR of all Borrowers during Same month in 2019 <sup><span class="badge btn-bob">i</span></sup>
               </label>
               <input type="tel" class="form-control" id="txtCombinedFeb20GMBR" placeholder="Enter Value">
             </div> 
