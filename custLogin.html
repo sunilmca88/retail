@@ -34,6 +34,9 @@
         background-color: #ff6633;
         border-color: #ff6633;
     }
+    .col-sm-12{
+      margin-bottom: 10px;
+    }
   </style>
   <title>Retail</title>
 </head>
@@ -67,22 +70,22 @@
           <div class="col-sm-12">
             <label for="accNo">Loan Account Number*</label>
             <input type="tel" class="form-control" id="accNo" placeholder="Enter Loan Account Number">
-            <small class="font-weight-light font-italic">
+            <small class="font-weight-light font-italic" id="eVijayaMsg">
               In case you are a customer of eVijaya bank please enter your new account number only.
               <a href="https://apps.bobinside.com/accmap/" target="_blank"><b>Click here</b></a> to know your new account number 
             </small>
           </div>
-          <div class="col-sm-12">
+          <!-- <div class="col-sm-12">
             <br/>
-          </div>
+          </div> -->
           <div class="col-sm-12">
             <label for="mobNo">Mobile Number*</label>
             <input type="tel" class="form-control" id="mobNo" placeholder="Enter Mobile Number">
             <small class="font-weight-light font-italic">Mobile number should be linked with account entered above</small>
           </div>
-          <div class="col-sm-12">
+          <!-- <div class="col-sm-12">
             <br/>
-          </div>
+          </div> -->
           <div class="col-sm-12">
             <button type="button" class="btn btn-bob" style="width:100%;" id="btnGenOTP">Generate OTP</button>
           </div>
@@ -165,17 +168,21 @@
         var accNo = $('#accNo').val().trim();
         var mobNo = $('#mobNo').val().trim();
         if("" === accNo || "" === mobNo){
+          $('#staticBackdropLabel').html("Error");
           $('#modalMsg').text("Please enter account number and mobile number and then click generate OTP button.");
           $('#staticBackdrop').modal();
         }else if(!$.isNumeric(accNo) || !$.isNumeric(mobNo)){
+          $('#staticBackdropLabel').html("Error");
           $('#modalMsg').text("Only Numbers are allowed");
           $('#staticBackdrop').modal();
           $('#accNo').val("");
           $('#mobNo').val("");
         }else if(accNo.length != 14){
+          $('#staticBackdropLabel').html("Error");
           $('#modalMsg').text("Recheck Account Number length. It should be between 14 to 16");
           $('#staticBackdrop').modal();
         }else if(mobNo.length != 10){
+          $('#staticBackdropLabel').html("Error");
           $('#modalMsg').text("Recheck Mobile Number length. It should be between 10 digits withput country code");
           $('#staticBackdrop').modal();
         }else{
@@ -190,6 +197,7 @@
       $('#submitOTP').click(function(){
         var OTP = $('#txtOTP').val().trim();
         if("" === OTP || !$.isNumeric(OTP) || OTP.length != 8){
+          $('#staticBackdropLabel').html("Error");
           $('#modalMsg').text("Please enter 8 digit OTP and then click submit OTP button.");
           $('#staticBackdrop').modal();
           $('#txtOTP').val("");
@@ -198,10 +206,31 @@
           //window.location.href = "./index.html";
         }
       });
-      
+      $('#eVijayaMsg').hide();
       $bank.change(function(){
         var selectedBank = $('option:selected', this).val();
-       // if()
+        if("ED" === selectedBank){
+          // $('#genOTP').hide();
+          $('#btnGenOTP').attr('disabled', true);
+          $('#accNo').attr('disabled', true);
+          $('#mobNo').attr('disabled', true);
+          $('#eVijayaMsg').hide();
+          $('#staticBackdropLabel').html("Information");
+          $('#modalMsg').text("Please contact your base Branch for information on eligibility and necessary action.");
+          $('#staticBackdrop').modal();
+        }else if("EV" === selectedBank){
+          $('#btnGenOTP').removeAttr('disabled');
+          $('#accNo').removeAttr('disabled');
+          $('#mobNo').removeAttr('disabled');
+          $('#eVijayaMsg').show();
+        }else if("BOB" === selectedBank){
+          $('#btnGenOTP').removeAttr('disabled');
+          $('#accNo').removeAttr('disabled');
+          $('#mobNo').removeAttr('disabled');
+          $('#eVijayaMsg').hide();
+        }else{
+          $('#genOTP').hide();
+        }
       });
 
 
