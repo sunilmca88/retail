@@ -56,6 +56,15 @@
         <!--ROW 1 STARTS HERE-->
         <div class="row" id="genOTP">
           <div class="col-sm-12">
+            <label for="bank">Bank Name</label>
+            <select id="bank" class="form-control">
+              <option value="" selected disabled>Select</option>
+              <option value="ED">eDena</option>
+              <option value="EV">eVijaya</option>
+              <option value="BOB">Bank of Baroda</option>
+            </select>
+          </div>
+          <div class="col-sm-12">
             <label for="accNo">Loan Account Number*</label>
             <input type="tel" class="form-control" id="accNo" placeholder="Enter Loan Account Number">
             <small class="font-weight-light font-italic">
@@ -148,7 +157,9 @@
 
   <script type="text/javascript">
     $(document).ready(function () {
+
       $('#validateOTP').hide();
+      var $bank = $('#bank');
       
       $('#btnGenOTP').click(function(){
         var accNo = $('#accNo').val().trim();
@@ -186,7 +197,11 @@
           window.location.replace("./custindex");
           //window.location.href = "./index.html";
         }
-
+      });
+      
+      $bank.change(function(){
+        var selectedBank = $('option:selected', this).val();
+       // if()
       });
 
 

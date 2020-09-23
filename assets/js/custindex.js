@@ -126,8 +126,9 @@ $(document).ready(function () {
             console.log("Calculated Stress: "+ parseFloat((((feb20Inc-latestInc)/feb20Inc)*100).toFixed(5)));
             return parseFloat((((feb20Inc-latestInc)/feb20Inc)*100).toFixed(5));
         }else{
-            $('#errTxt').text("There is some error in entered data. Please recheck.");
-            $('#staticBackdrop').modal();
+            // $('#errTxt').text("There is some error in entered data. Please recheck.");
+            // $('#staticBackdrop').modal();
+            showFailureResult();
             return 0;
         }
     };
