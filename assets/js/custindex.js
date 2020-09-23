@@ -95,10 +95,10 @@ $(document).ready(function () {
         $('#txtCombinedFeb20GMBR').val("");
         var selectedGMBRType = $('option:selected', this).val();
         if("GMBR2019" === selectedGMBRType){
-            $('#lblGMBR1920').html("Combined GMBR of all Other Individuals during Same month in 2019 <sup><span class='badge badge-warning'>i</span></sup>");
+            $('#lblGMBR1920').html("Combined GMBR of all all Borrowers during Same month of 2019 <sup><span class='badge badge-warning'>i</span></sup>");
             
         }else if("GMBR2020" === selectedGMBRType){
-            $('#lblGMBR1920').html("Combined GMBR of all Other Individuals during Feb2020 <sup><span class='badge badge-warning'>i</span></sup>");
+            $('#lblGMBR1920').html("Combined GMBR of all all Borrowers during Feb 2020 <sup><span class='badge badge-warning'>i</span></sup>");
         }else{
             $('#errTxt').text("There is some error on page");
             $('#staticBackdrop').modal();
@@ -111,8 +111,8 @@ $(document).ready(function () {
         console.log(feb20Inc-latestInc);
         console.log(feb20Inc-latestInc > 0);
         if(feb20Inc-latestInc >= 0){
-            console.log("Calculated Stress: "+ parseFloat((((feb20Inc-latestInc)/feb20Inc)*100).toFixed(2)));
-            return parseFloat((((feb20Inc-latestInc)/feb20Inc)*100).toFixed(2));
+            console.log("Calculated Stress: "+ parseFloat((((feb20Inc-latestInc)/feb20Inc)*100).toFixed(5)));
+            return parseFloat((((feb20Inc-latestInc)/feb20Inc)*100).toFixed(5));
         }else{
             $('#errTxt').text("There is some error in entered data. Please recheck.");
             $('#staticBackdrop').modal();

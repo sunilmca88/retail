@@ -94,41 +94,25 @@
             <select id="borrowerType" class="form-control">
               <option value="" selected disabled>Select</option>
               <option value="sal">Salaried</option>
-              <option value="oth">Other Individual</option>
+              <option value="oth">Other Individuals(Self-Employed/Businessman)</option>
               <option value="laFrr">Loan against FRR</option>
-              <option value="salAndOth">Salaried and Other Individual Both</option>
+              <option value="salAndOth">Salaried and Other Individuals Both</option>
             </select>
           </div>
-          <!-- <div class="col-sm">
-            <label for="accScheme">Scheme</label>
-            <select id="accScheme" class="form-control" disabled>
-              <option selected disabled>Select</option>-->
-              <!-- Options will be loaded dynamically with JS 
-            </select>
-          </div>           -->
-          <!-- <div class="col-sm">
-            <label for="noOfApplicant">Number of Applicants</label>
-            <select id="noOfApplicant" class="form-control" disabled>
-              <option selected value="0" disabled>Select</option>
-            </select>
-          </div> -->
-          <!-- <div class="col-sm">
-            <label for="sanctndAmt">Sanctioned Amount</label>
-            <input type="tel" class="form-control" id="sanctndAmt" placeholder="Enter Value" disabled>
-          </div> -->
         </div>
         <!--ROW 1 ENDS HERE-->
+        
         <!--ROW 2 STARTS HERE-->
         <div class="row" id="rowSal">
           <div class="col-sm">
             <label for="txtCombinedLatestSalary" data-toggle="tooltip" title="Sum of latest/current salary of all co-borrowers">
-              Combined Latest Salary of all Salaried Borrowers <sup><span class="badge badge-warning">i</span></sup>
+              Combined Latest Salary of all Borrowers <sup><span class="badge badge-warning">i</span></sup>
             </label>
             <input type="tel" class="form-control" id="txtCombinedLatestSalary" placeholder="Enter Value">
           </div>
           <div class="col-sm">
             <label for="txtCombinedFeb20Salary" data-toggle="tooltip" title="Sum of salary of all co-borrowers in February 2020">
-                Combined Salary of all Salaried Borrowers as on 29 Feb 2020 <sup><span class="badge badge-warning">i</span></sup>
+                Combined Salary of all Borrowers as on 29 Feb 2020 <sup><span class="badge badge-warning">i</span></sup>
             </label>
             <input type="tel" class="form-control" id="txtCombinedFeb20Salary" placeholder="Enter Value">
           </div> 
@@ -138,12 +122,12 @@
         <div class="row" id="rowGMBR">
             <div class="col-sm">
               <label for="txtCombinedLatestGMBR" data-toggle="tooltip" title="GMBR: Gross Monthly Business Receipts">
-                Combined GMBR of all Other Individuals during last month <sup><span class="badge badge-warning">i</span></sup>
+                Combined GMBR of all Borrowers during last month <sup><span class="badge badge-warning">i</span></sup>
               </label>
               <input type="tel" class="form-control" id="txtCombinedLatestGMBR" placeholder="Enter Value">
             </div>
             <div class="col-sm">
-              <label for="gmbrType">GMBR Options (If GMBR of Same month in 2019 is available else choose GMBR of Feb 20)</label>
+              <label for="gmbrType">Previous GMBR Options (If GMBR of Same month of 2019 is available, else choose GMBR of Feb 2020)</label>
               <select id="gmbrType" class="form-control">
                 <!-- <option selected disabled>Select</option> -->
                 <option value="GMBR2019" selected>GMBR of Same month in 2019</option>
@@ -153,7 +137,7 @@
             </div>
             <div class="col-sm">
               <label for="txtCombinedFeb20GMBR" id = "lblGMBR1920" data-toggle="tooltip" title="GMBR: Gross Monthly Business Receipts">
-                  Combined GMBR of all Other Individuals during Same month in 2019 <sup><span class="badge badge-warning">i</span></sup>
+                  Combined GMBR of all Borrowers during Same month in 2019 <sup><span class="badge badge-warning">i</span></sup>
               </label>
               <input type="tel" class="form-control" id="txtCombinedFeb20GMBR" placeholder="Enter Value">
             </div> 
