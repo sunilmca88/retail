@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -68,7 +69,7 @@
             </button> -->
           </div>
           <div class="modal-body">
-            <h6>Please do not refresh this page otherwise data will be lost and session will expire.
+            <h6 id="errTxt">Please do not refresh this page otherwise data will be lost and session will expire.
                <br/> <br/>Don't press <b class="badge-warning" style="padding:0 5px">F5</b> or <b class="badge-warning" style="padding:0 5px">CTRL+R</b>. </h6>
           </div>
           <div class="modal-footer">
@@ -89,27 +90,28 @@
             <input type="tel" class="form-control" id="accNo" placeholder="Enter Account No." value="2904XXXXX2323" disabled>
           </div>
           <div class="col-sm">
-            <label for="accType">Account Type</label>
-            <select id="accType" class="form-control">
+            <label for="borrowerType">Borrower Type</label>
+            <select id="borrowerType" class="form-control">
               <option value="" selected disabled>Select</option>
-              <option value="loan">Loan</option>
-              <option value="frr">FRR</option>
-              <option value="od">Overdraft</option>
+              <option value="sal">Salaried</option>
+              <option value="oth">Other Individual</option>
+              <option value="laFrr">Loan against FRR</option>
+              <option value="salAndOth">Salaried and Other Individual Both</option>
             </select>
           </div>
-          <div class="col-sm">
+          <!-- <div class="col-sm">
             <label for="accScheme">Scheme</label>
             <select id="accScheme" class="form-control" disabled>
-              <option selected disabled>Select</option>
-              <!-- Options will be loaded dynamically with JS -->
+              <option selected disabled>Select</option>-->
+              <!-- Options will be loaded dynamically with JS 
             </select>
-          </div>          
-          <div class="col-sm">
+          </div>           -->
+          <!-- <div class="col-sm">
             <label for="noOfApplicant">Number of Applicants</label>
             <select id="noOfApplicant" class="form-control" disabled>
               <option selected value="0" disabled>Select</option>
             </select>
-          </div>
+          </div> -->
           <!-- <div class="col-sm">
             <label for="sanctndAmt">Sanctioned Amount</label>
             <input type="tel" class="form-control" id="sanctndAmt" placeholder="Enter Value" disabled>
@@ -120,13 +122,13 @@
         <div class="row" id="rowSal">
           <div class="col-sm">
             <label for="txtCombinedLatestSalary" data-toggle="tooltip" title="Sum of latest/current salary of all co-borrowers">
-              Combined Latest Salary of all Salaried Co-Borrower <sup><span class="badge badge-warning">i</span></sup>
+              Combined Latest Salary of all Salaried Borrowers <sup><span class="badge badge-warning">i</span></sup>
             </label>
             <input type="tel" class="form-control" id="txtCombinedLatestSalary" placeholder="Enter Value">
           </div>
           <div class="col-sm">
             <label for="txtCombinedFeb20Salary" data-toggle="tooltip" title="Sum of salary of all co-borrowers in February 2020">
-                Combined Feb 2020 Salary of all Salaried Co-Borrower <sup><span class="badge badge-warning">i</span></sup>
+                Combined Salary of all Salaried Borrowers as on 29 Feb 2020 <sup><span class="badge badge-warning">i</span></sup>
             </label>
             <input type="tel" class="form-control" id="txtCombinedFeb20Salary" placeholder="Enter Value">
           </div> 
@@ -135,14 +137,14 @@
         <!--ROW 3 STARTS HERE-->
         <div class="row" id="rowGMBR">
             <div class="col-sm">
-              <label for="txtCombinedLatestSalary" data-toggle="tooltip" title="Sum of latest/current GMBR of all other co-borrowers">
-                Combined Latest GMBR of all Other Co-Borrower <sup><span class="badge badge-warning">i</span></sup>
+              <label for="txtCombinedLatestSalary" data-toggle="tooltip" title="GMBR: Gross Monthly Business Receipts">
+                Combined GMBR of all Other Individuals during last month <sup><span class="badge badge-warning">i</span></sup>
               </label>
               <input type="tel" class="form-control" id="txtCombinedLatestSalary" placeholder="Enter Value">
             </div>
             <div class="col-sm">
-              <label for="txtCombinedFeb20Salary" data-toggle="tooltip" title="Sum of GMBR of all Other co-borrowers in February 2020">
-                  Combined Feb 2020 GMBR of all Other Co-Borrower <sup><span class="badge badge-warning">i</span></sup>
+              <label for="txtCombinedFeb20Salary" data-toggle="tooltip" title="GMBR: Gross Monthly Business Receipts">
+                  Combined GMBR of all Other Individuals during Same month in 2019 <sup><span class="badge badge-warning">i</span></sup>
               </label>
               <input type="tel" class="form-control" id="txtCombinedFeb20Salary" placeholder="Enter Value">
             </div> 
@@ -172,7 +174,7 @@
         <!--ROW 5 STARTS HERE-->
          <div class="row" id="rowCalculate">
             <div class="col-sm-12 text-center">
-                <button type="button" class="btn btn-bob w-50">Chech Eligibility</button>
+                <button type="button" class="btn btn-bob w-50">Check Eligibility</button>
             </div>
         </div>
         <!--ROW 5 ENDS HERE-->

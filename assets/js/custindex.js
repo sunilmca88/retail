@@ -41,6 +41,7 @@ $(document).ready(function () {
     var $accType = $("#accType");
     var $accSchm = $("#accScheme");
     var $noOfApplicant = $("#noOfApplicant");
+    var $borrowerType = $('#borrowerType');
     /******Variable Initialisation ends here******/
 
     /******Default function Initialisation starts here******/
@@ -52,6 +53,30 @@ $(document).ready(function () {
 
    // $('#staticBackdrop').modal();
     /******Default function Initialisation ends here******/
+
+    $borrowerType.change(function(){
+        var selectedBorrowerType = $('option:selected', this).val();
+        if("sal" === selectedBorrowerType){
+            $('#rowSal').show();
+            $('#rowGMBR').hide();
+            $('#rowRent').hide();   
+        }else if("oth" === selectedBorrowerType){
+            $('#rowSal').hide();
+            $('#rowGMBR').show();
+            $('#rowRent').hide();   
+        }else if("salAndOth" === selectedBorrowerType){
+            $('#rowSal').show();
+            $('#rowGMBR').show();
+            $('#rowRent').hide();   
+        }else if("laFrr" === selectedBorrowerType){
+            $('#rowSal').hide();
+            $('#rowGMBR').hide();
+            $('#rowRent').show();   
+        }else{
+            $('#errTxt').text("There is some error on page");
+            $('#staticBackdrop').modal();
+        }
+    });
 
     $accType.change(function () {        
         $noOfApplicant.removeAttr('disabled');
