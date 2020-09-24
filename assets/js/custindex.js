@@ -134,7 +134,7 @@ $(document).ready(function () {
     };
 
     function showSuccessResult(){
-        $('#result').html("You are provisionally eligible for resolution under the framework. Please download the application form as per link below and approach base branch alongwith application form and necessary documents to proceed further. Please be informed that final eligibility for resolution framework will be subject to other criterias as per Bank’s extant guidelines such as value of available security, age, repayment capacity, etc. Please note down the URN and mention the same on application form. ");
+        $('#result').html("You are provisionally eligible for resolution under the framework. Please download the application form as per link below and approach base branch alongwith application form and necessary documents to proceed further. Please note that final eligibility for resolution framework will be subject to other criterias as per Bank’s extant guidelines such as value of available security, age, repayment capacity, etc. Please note down the URN and mention the same on application form. ");
         $('#rowResult').show();
     }
 

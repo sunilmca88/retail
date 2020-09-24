@@ -70,10 +70,10 @@
           <div class="col-sm-12">
             <label for="accNo">Loan Account Number*</label>
             <input type="tel" class="form-control" id="accNo" placeholder="Enter Loan Account Number" disabled>
-            <!--<small class="font-weight-light font-italic" id="eVijayaMsg">
+            <small class="font-weight-light font-italic" id="eVijayaMsg">
               In case you are a customer of eVijaya bank please enter your new account number only.
               <a href="https://apps.bobinside.com/accmap/" target="_blank"><b>Click here</b></a> to know your new account number 
-            </small>-->
+            </small>
           </div>
           <!-- <div class="col-sm-12">
             <br/>
@@ -110,7 +110,9 @@
           <div class="col-sm-12">
             <label for="txtOTP">OTP*</label>
             <input type="tel" class="form-control" id="txtOTP" placeholder="Enter 8 Digit OTP">
-            <small class="font-weight-light font-italic">Enter OTP recevied on registered mobile number</small>
+            <small class="font-weight-light font-italic">
+              <a href="#" id="resend_otp"><b>Resend OTP</b></a>
+            </small>
           </div>
           <div class="col-sm-12">
             <br/>
@@ -158,6 +160,10 @@
   <script type="text/javascript">
     $(document).ready(function () {
 
+      function disableAllBtn(){
+        $(':button').attr('disabled', true);
+      }
+     
       $('#validateOTP').hide();
       var $bank = $('#bank');
       var selectedBank = "";
@@ -174,15 +180,15 @@
           $('#staticBackdrop').modal();
           $('#accNo').val("");
           $('#mobNo').val("");
-        }else if(accNo.length != 14 && "BOB" === selectedBank){
+        }else if(accNo.length != 14 /*&& "BOB" === selectedBank*/){
           $('#staticBackdropLabel').html("Error");
           $('#modalMsg').text("Recheck Account Number length. It should be 14 digits only");
           $('#staticBackdrop').modal();
-        }else if(accNo.length != 15 && "EV" === selectedBank){
+        }/*else if(accNo.length != 15 && "EV" === selectedBank){
           $('#staticBackdropLabel').html("Error");
           $('#modalMsg').text("Recheck Account Number length. It should be 15 digits only");
           $('#staticBackdrop').modal();
-        }else if(mobNo.length != 10){
+        }*/else if(mobNo.length != 10){
           $('#staticBackdropLabel').html("Error");
           $('#modalMsg').text("Recheck Mobile Number length. It should be between 10 digits withput country code");
           $('#staticBackdrop').modal();
@@ -237,6 +243,11 @@
         }
       });
 
+      $('#resend_otp').click(function(){
+        disableAllBtn();
+        alert("Resend OTP form submit here");
+
+      });
 
     });
   </script>
