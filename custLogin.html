@@ -70,10 +70,10 @@
           <div class="col-sm-12">
             <label for="accNo">Loan Account Number*</label>
             <input type="tel" class="form-control" id="accNo" placeholder="Enter Loan Account Number" disabled>
-            <small class="font-weight-light font-italic" id="eVijayaMsg">
+            <!--<small class="font-weight-light font-italic" id="eVijayaMsg">
               In case you are a customer of eVijaya bank please enter your new account number only.
               <a href="https://apps.bobinside.com/accmap/" target="_blank"><b>Click here</b></a> to know your new account number 
-            </small>
+            </small>-->
           </div>
           <!-- <div class="col-sm-12">
             <br/>
@@ -163,7 +163,7 @@
 
       $('#validateOTP').hide();
       var $bank = $('#bank');
-      
+      var selectedBank = "";
       $('#btnGenOTP').click(function(){
         var accNo = $('#accNo').val().trim();
         var mobNo = $('#mobNo').val().trim();
@@ -177,9 +177,13 @@
           $('#staticBackdrop').modal();
           $('#accNo').val("");
           $('#mobNo').val("");
-        }else if(accNo.length != 14){
+        }else if(accNo.length != 14 && "BOB" === selectedBank){
           $('#staticBackdropLabel').html("Error");
           $('#modalMsg').text("Recheck Account Number length. It should be 14 digits only");
+          $('#staticBackdrop').modal();
+        }else if(accNo.length != 15 && "EV" === selectedBank){
+          $('#staticBackdropLabel').html("Error");
+          $('#modalMsg').text("Recheck Account Number length. It should be 15 digits only");
           $('#staticBackdrop').modal();
         }else if(mobNo.length != 10){
           $('#staticBackdropLabel').html("Error");
@@ -211,7 +215,7 @@
       });
       $('#eVijayaMsg').hide();
       $bank.change(function(){
-        var selectedBank = $('option:selected', this).val();
+        selectedBank = $('option:selected', this).val();
         if("ED" === selectedBank){
           // $('#genOTP').hide();
           $('#btnGenOTP').attr('disabled', true);

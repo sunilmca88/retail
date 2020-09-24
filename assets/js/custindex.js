@@ -134,12 +134,12 @@ $(document).ready(function () {
     };
 
     function showSuccessResult(){
-        $('#result').html("You are <b>eligible</b> for resolution under framework. Please download the application form as per link below and approach base branch for necessary approval.");
+        $('#result').html("You are provisionally eligible for resolution under the framework. Please download the application form as per link below and approach base branch alongwith application form and necessary documents to proceed further. Please be informed that final eligibility for resolution framework will be subject to other criterias as per Bank’s extant guidelines such as value of available security, age, repayment capacity, etc. Please note down the URN and mention the same on application form. ");
         $('#rowResult').show();
     }
 
     function showFailureResult(){
-        $('#result').html("You are <b>Not Eligible</b> for resolution as per Bank's extant norms. Kindly contact your base Branch for clarifications.");
+        $('#result').html("Thank you for having relationship with Bank of Baroda. However, we regret to inform that you do not satisfies the minimum stress criteria for resolution as per Bank’s extant guidelines. You may contact your base Branch for clarifications.");
         $('#rowResult').show();
     }
 
