@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="./assets/css/custom.css">
 
   <title>Retail</title>
+  <link rel="shortcut icon" href="./assets/img/favicon.ico">
 </head>
 
 <body>
@@ -52,21 +53,18 @@
   <main role="main" class="container">
 
     <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="popupModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Warning</h5>
-            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button> -->
+            <h5 class="modal-title" id="modalTitle">Warning</h5>
           </div>
           <div class="modal-body">
-            <h6>Please do not refresh this page otherwise data will be lost and session will expire.
+            <h6 id="modalMsg">Please do not refresh this page otherwise data will be lost and session will expire.
                <br/> <br/>Don't press <b class="badge-warning" style="padding:0 5px">F5</b> or <b class="badge-warning" style="padding:0 5px">CTRL+R</b>. </h6>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">I Accept</button>
+            <button type="button" class="btn btn-bob" data-dismiss="modal">I Accept</button>
           </div>
         </div>
       </div>
@@ -80,11 +78,11 @@
         <div class="row">
           <div class="col-sm">
             <label for="accNo">Account Number</label>
-            <input type="tel" class="form-control" id="accNo" placeholder="Enter Account No." value="29040100002323">
+            <input type="tel" class="form-control" id="accNo" name="accNo" placeholder="Enter Account No." value="29040100002323">
           </div>
           <div class="col-sm">
             <label for="accType">Account Type</label>
-            <select id="accType" class="form-control">
+            <select id="accType" name="accType" class="form-control">
               <option value="" selected disabled>Select</option>
               <option value="loan">Loan</option>
               <option value="frr">FRR</option>
@@ -93,20 +91,15 @@
           </div>
           <div class="col-sm">
             <label for="accScheme">Scheme</label>
-            <select id="accScheme" class="form-control" disabled>
+            <select id="accScheme" name="accScheme" class="form-control" disabled>
               <option selected disabled>Select</option>
               <!-- Options will be loaded dynamically with JS -->
             </select>
           </div>          
-          <div class="col-sm">
-            <label for="noOfApplicant">Number of Applicants</label>
-            <select id="noOfApplicant" class="form-control" disabled>
-              <option selected value="0" disabled>Select</option>
-            </select>
-          </div>
+         
           <div class="col-sm">
             <label for="sanctndAmt">Sanctioned Amount</label>
-            <input type="tel" class="form-control" id="sanctndAmt" placeholder="Enter Value" disabled>
+            <input type="tel" class="form-control" id="sanctndAmt" name="sanctndAmt" placeholder="Enter Value" disabled>
           </div>
         </div>
         <!--ROW 1 ENDS HERE-->
@@ -115,61 +108,94 @@
         <div class="row">
           <div class="col-sm">
             <label for="prsntOutstdng">Present Outstanding</label>
-            <input type="tel" class="form-control" id="prsntOutstdng" placeholder="Enter Value">
+            <input type="tel" class="form-control" id="prsntOutstdng" name="prsntOutstdng" placeholder="Enter Value">
           </div>         
           <div class="col-sm">
             <label for="valOfSecurity">Value of Security</label>
-            <input type="tel" class="form-control" id="valOfSecurity" placeholder="Enter Value">
+            <input type="tel" class="form-control" id="valOfSecurity" name="valOfSecurity" placeholder="Enter Value">
           </div>
           <div class="col-sm">
             <label for="proposedROI">Proposed ROI</label>
-            <input type="tel" class="form-control" id="proposedROI" placeholder="Enter Value">
+            <input type="tel" class="form-control" id="proposedROI" name="proposedROI" placeholder="Enter Value">
           </div>
+          <!-- <div class="col-sm">
+            <label for="estIntMoratorium" data-toggle="tooltip" title="Estimated interest during moratorium">
+              Moratorium Est. Int.  <sup><span class="badge btn-bob">i</span></sup>
+            </label>
+            <input type="tel" class="form-control" id="estIntMoratorium" name="estIntMoratorium" placeholder="Enter Value" disabled>
+          </div> -->
+          <div class="col-sm">
+            <label for="blncLoanTenure">Balance Tenure(in months)</label>
+            <input type="tel" class="form-control" id="blncLoanTenure" name="blncLoanTenure" placeholder="Enter Value" disabled>
+          </div>          
+        </div>
+        <!--ROW 2 ENDS HERE-->
+        <br />
+        <!--ROW 3 STARTS HERE-->
+        <div class="row">         
           <div class="col-sm">
             <label for="sanctLTV" data-toggle="tooltip" title="LTV as per sanctioned terms">
-              Santioned LTV <sup><span class="badge badge-warning">i</span></sup>
+              Santioned LTV <sup><span class="badge btn-bob">i</span></sup>
             </label>
             <input type="tel" class="form-control" id="sanctLTV" placeholder="Enter Value">
           </div>
           <div class="col-sm">
             <label for="schmLTV" data-toggle="tooltip" title="LTV as per present schematic guidelines including additional LTV in case of Mortgage Loans">
-              Schematic LTV <sup><span class="badge badge-warning">i</span></sup>
+              Schematic LTV <sup><span class="badge btn-bob">i</span></sup>
             </label>
             <input type="tel" class="form-control" id="schmLTV" placeholder="Enter Value">
-          </div> 
-        </div>
-        <!--ROW 2 ENDS HERE-->
-        <br />
-        <!--ROW 3 STARTS HERE-->
-        <div class="row">
+          </div>
+          <div class="col-sm">
+            <label for="fitlRepTenure" data-toggle="tooltip" title="Funded Interest Term Loan">
+              FITL Repayment Tenure(in months) <sup><span class="badge btn-bob">i</span></sup>
+            </label>
+            <input type="tel" class="form-control" id="fitlRepTenure" placeholder="Enter Value">
+          </div>
+          <!-- <div class="col-sm">
+            <label for="blncPeriodRetirement">Balance Period upto Retirement</label>
+            <input type="tel" class="form-control" id="blncPeriodRetirement" placeholder="Enter Value">
+          </div> -->
           <div class="col-sm">
             <label for="unsrvcdInt" data-toggle="tooltip" title="Unserviced interest after end of COVID-19 regulatory package upto date (including expected interest upto date of implementation)">
-              Unserviced Interest <sup><span class="badge badge-warning">i</span></sup>
+              Unserviced Interest <sup><span class="badge btn-bob">i</span></sup>
             </label>
             <input type="tel" class="form-control" id="unsrvcdInt" placeholder="Enter Value" disabled>
           </div>
-         
-          <div class="col-sm">
-            <label for="estIntMoratorium" data-toggle="tooltip" title="Estimated interest during moratorium">
-              Moratorium Est. Int.  <sup><span class="badge badge-warning">i</span></sup>
-            </label>
-            <input type="tel" class="form-control" id="estIntMoratorium" placeholder="Enter Value">
-          </div>
-
-          <div class="col-sm">
-            <label for="blncLoanTenure">Balance Tenure(in months)</label>
-            <input type="tel" class="form-control" id="blncLoanTenure" placeholder="Enter Value" disabled>
-          </div>
-          <div class="col-sm">
-            <label for="blncPeriodRetirement">Balance Period upto Retirement</label>
-            <input type="tel" class="form-control" id="blncPeriodRetirement" placeholder="Enter Value">
-          </div>
-          <div class="col-sm">
+          <!-- <div class="col-sm">
             <label for="moratoriumPeriod">Moratorium Period</label>
             <input type="tel" class="form-control" id="moratoriumPeriod" placeholder="Enter Value">
-          </div>
+          </div> -->
         </div>
         <!--ROW 3 ENDS HERE-->
+        <br />
+        <!--ROW 4 STARTS HERE-->
+        <div class="row">         
+          <div class="col-sm">
+            <label for="prsntEMI">
+              Present EMI
+            </label>
+            <input type="tel" class="form-control" id="prsntEMI" name="prsntEMI" placeholder="Enter Value">
+          </div>
+          <div class="col-sm">
+            <label for="fitlMorat">
+              FITL Moratorium Requested (Months)
+            </label>
+            <input type="tel" class="form-control" id="fitlMorat" name="fitlMorat" placeholder="Enter Value">
+          </div>
+          <div class="col-sm">
+            <label for="loanMorat">
+              Loan Moratorium Requested(Months)
+            </label>
+            <input type="tel" class="form-control" id="loanMorat" name="loanMorat" placeholder="Enter Value">
+          </div>
+          <div class="col-sm">
+            <label for="noOfApplicant">Number of Applicants</label>
+            <select id="noOfApplicant" name="noOfApplicant" class="form-control" disabled>
+              <option selected value="0" disabled>Select</option>
+            </select>
+          </div>
+        </div>
+        <!--ROW 4 ENDS HERE-->
       </div>
     </div>
 
